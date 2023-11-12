@@ -19,7 +19,6 @@ function RegisterName() {
                 <input type="text" className='input-box' placeholder='Last Name'/>
 
             <button className='register-button'>Next</button>
-            {/* <button className='forgot-password-button'>Forgot password?</button> */}
             <h4>Already have an account? <a href="/Login" className='sign-up-link'>Sign in</a></h4>
             </label>
             </form>
