@@ -20,7 +20,6 @@ function RegisterUserName() {
                 <p className='register-text'>Password</p>
                 <input type="text" className='input-box' placeholder='Password'/>
             <button className='register-button'>Sign up</button>
-            {/* <button className='forgot-password-button'>Forgot password?</button> */}
             <h4>Already have an account? <a href="/Login" className='sign-up-link'>Sign in</a></h4>
             </label>
             </form>
