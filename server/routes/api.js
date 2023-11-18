@@ -15,6 +15,8 @@ router.post('/add', createPost);
 
 router.get('/feed', getAllPosts);
 
+router.delete('/delete/:id', deletePosts);
+
 // router.get('/user', seeUserStats);
 
 module.exports = (router);
