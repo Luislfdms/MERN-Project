@@ -9,11 +9,11 @@ const sampleController = {
 };
 
 const createPost = async (req, res) => {
-  const {postTitle, postMain, userID, upvotes, downvotes} = req.body
+  const {postTitle, postMain, userID, image, upvotes, downvotes} = req.body
 
   //add post to db
   try {
-    const post = await Post.create({postTitle, postMain, userID, upvotes, downvotes})
+    const post = await Post.create({postTitle, postMain, userID, image, upvotes, downvotes})
     res.status(200).json(post)
   } catch (error) {
     res.status(400).json({error: error.message})

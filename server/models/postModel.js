@@ -14,10 +14,10 @@ const postSchema = new Schema({
     type: String,
     required: true
   },
-  // image: {
-  //   data: Buffer,
-  //   contentType: String
-  // },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
   upvotes: {
     type: String,
     required: true

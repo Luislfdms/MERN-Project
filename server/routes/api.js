@@ -4,7 +4,8 @@ const {
   sampleController,
   createPost,
   getAllPosts,
-  seeUserStats
+  seeUserStats,
+  deletePosts
 } = require('../controllers/sampleController');
 
 // Define routes
