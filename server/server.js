@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config');
-const apiRoutes = require('./routes/api');
+const postAPIRoutes = require('./routes/postAPI');
+const userAPIRoutes = require('./routes/userAPI');
 
 // Connection to database
 require('./dbConnection'); 
@@ -19,7 +20,8 @@ mongoose.connect(config.mongoURI)
   .catch(err => console.log(err));
 
 // Define API routes
-app.use('/api', apiRoutes);
+app.use('/postAPI', postAPIRoutes);
+app.use('/userAPI', userAPIRoutes)
 
 const PORT = process.env.PORT || 8000;
 
