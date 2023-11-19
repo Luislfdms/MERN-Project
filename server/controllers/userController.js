@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const {username, password} = req.body
 
-  const user = await User.find({username: username, password: password})
+  const user = await User.findOne({username: username, password: password})
   if(!user) {
     return res.status(400).json({error: 'COULD NOT FIND USER'})
   }
@@ -62,11 +62,21 @@ const updatePassword = async (req, res) => {
   res.status(200).json('PASSWORD UPDATED')
 }
 
+const seeUserStats = async (req, res) => {
+  const {username} = req.body
+
+  const user = await User.findOne({username: username})
+  if(!user) {
+    return res.status(400).json({error: 'COULD NOT FIND USER'})
+  }
+  res.status(200).json(user)
+}
 
 
 module.exports = {
   createUser,
   loginUser,
   deleteUser,
-  updatePassword
+  updatePassword,
+  seeUserStats
 };

@@ -54,7 +54,6 @@ const deletePosts = async (req, res) => {
 }
 
 module.exports = {
-  sampleController,
   createPost,
   getAllPosts,
   deletePosts,
