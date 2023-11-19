@@ -26,7 +26,7 @@ const userSchema = new Schema({
     type: String
   }],
   following: [{
-    String
+    type: String
   }]
 }, { timestamps: true })
 
