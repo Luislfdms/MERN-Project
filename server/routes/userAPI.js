@@ -4,7 +4,7 @@ const {
   createUser,
   loginUser,
   deleteUser,
-  // seeUserStats,
+  seeUserStats,
   updatePassword
 } = require('../controllers/userController');
 
@@ -15,7 +15,7 @@ router.get('/login', loginUser);
 
 router.delete('/delete', deleteUser);
 
-// router.get('/userStats', seeUserStats);
+router.get('/user', seeUserStats);
 
 router.patch('/updatePass', updatePassword)
 
