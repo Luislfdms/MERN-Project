@@ -19,11 +19,11 @@ const postSchema = new Schema({
     contentType: String,
   },
   upvotes: {
-    type: String,
+    type: Number,
     required: true
   },
   downvotes: {
-    type: String,
+    type: Number,
     required: true
   }
 }, { timestamps: true })
