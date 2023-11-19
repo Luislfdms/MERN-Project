@@ -53,9 +53,35 @@ const deletePosts = async (req, res) => {
   res.status(200).json('POST DELETED')
 }
 
+const upvote = async (req, res) => {
+  const {id} = req.body
+
+  const post = await Post.findOne({_id: id})
+
+  if(!post) {
+    return res.status(404).json({error: 'POST NOT FOUND'})
+  }
+  const upvoteUpdate = await Post.findOneAndUpdate({_id: id},{upvotes: post.upvotes + 1})
+  res.status(200).json('UPVOTES UPDATED')
+}
+
+const downvote = async (req, res) => {
+  const {id} = req.body
+
+  const post = await Post.findOne({_id: id})
+
+  if(!post) {
+    return res.status(404).json({error: 'POST NOT FOUND'})
+  }
+  const upvoteUpdate = await Post.findOneAndUpdate({_id: id},{downvotes: post.downvotes + 1})
+  res.status(200).json('DOWNVOTES UPDATED')
+}
+
 module.exports = {
   createPost,
   getAllPosts,
   deletePosts,
-  getUserPosts
+  getUserPosts,
+  upvote,
+  downvote
 };
