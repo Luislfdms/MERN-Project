@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 const Post = require('../models/postModel')
 const User = require('../models/userModel')
 
@@ -12,7 +13,7 @@ const createUser = async (req, res) => {
   const {firstName, lastName, email, username, password, followers, following} = req.body
 
   //add user to db
-  const testUser = await User.find({username: username})
+  const testUser = await User.findOne({username: username})
   if(!testUser) {
     try {
       const user = await User.create({firstName, lastName, email, username, password, followers, following})
@@ -27,10 +28,21 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const {username, password} = req.body
 
-  const user = await User.findOne({username: username, password: password})
+  // const user = await User.findOne({username: username, password: password})
+
+  const user = await User.findOne({username: username})
+
+  // User auth
   if(!user) {
     return res.status(400).json({error: 'COULD NOT FIND USER'})
   }
+
+  passStatus = await bcrypt.compare(password, user.password)
+
+  if(!passStatus) {
+    return res.status(400).json({error: 'INCORRECT PASSWORD'})
+  }
+
   res.status(200).json('login successful')
 }
 
