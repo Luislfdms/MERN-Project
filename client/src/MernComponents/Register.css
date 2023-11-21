@@ -159,3 +159,15 @@ button {
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  .register-signup-link-button:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .nameDisplay {
+    display: none;
+  }
+  .userNameDisplay {
+    display: none;
+  }
