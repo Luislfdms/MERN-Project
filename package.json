@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "express": "^4.17.1",
-    "body-parser": "^1.19.0",
-    "mongoose": "^6.1.4"
+    "node": "^21.1.0"
+  },
+  "scripts": {
+    "heroku-prebuild": "cd client && npm install",
+    "heroku-postbuild": "cd server && npm install && node server.js"
   }
 }
+
 
