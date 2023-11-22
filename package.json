@@ -4,7 +4,7 @@
   },
   "scripts": {
     "start": "server/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && cd client && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && cd client && npm install && ./node_modules/.bin/react-scripts build"
   }
 }
 
