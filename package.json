@@ -5,6 +5,6 @@
   "scripts": {
     "heroku-prebuild": "cd client && npm install",
     "start": "cd client && npm start",
-    "heroku-postbuild": "cd server && npm install"
+    "heroku-postbuild": "cd server && npm install && node server.js"
   }
 }
