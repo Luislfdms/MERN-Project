@@ -3,7 +3,6 @@
     "node": "^21.1.0"
   },
   "scripts": {
-    "start": "server/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && cd client && npm install && ./node_modules/.bin/react-scripts build"
   }
 }
