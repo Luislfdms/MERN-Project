@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 const config = require('./config');
 const postAPIRoutes = require('./routes/postAPI');
 const userAPIRoutes = require('./routes/userAPI');
@@ -9,10 +9,12 @@ const userAPIRoutes = require('./routes/userAPI');
 require('./dbConnection'); 
 
 const app = express();
-console.log(config.mongoURI);
+//console.log(config.mongoURI);
 
 // Body parser middleware
-app.use(bodyParser.json());
+app.use(express.json());
+
+app.use(cors());
 
 // MongoDB connection
 mongoose.connect(config.mongoURI)
@@ -22,6 +24,10 @@ mongoose.connect(config.mongoURI)
 // Define API routes
 app.use('/postAPI', postAPIRoutes);
 app.use('/userAPI', userAPIRoutes)
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 
 const PORT = process.env.PORT || 8000;
 

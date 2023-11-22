@@ -1,4 +1,4 @@
-import {useState, React} from 'react'
+import React, { useState } from 'react';
 import "./Login.css";
 import Register from "./RegisterPage.js";
 import { Link } from "react-router-dom";
@@ -7,16 +7,18 @@ import axios from "axios";
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        //Having trouble trying to get this to connect, saying 404 error, I'm probably doing something wrong
-        // try {
-        //     const res = await axios.post("/login", {username, password});
-        //     console.log("res", res.data)
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const response = await axios.post("/userAPI/login", {username, password});
+            console.log("Login succesful:", response.data)
+            setErrorMessage("");
+        } catch (err) {
+            console.log("Login Failed", err.response.data);
+            setErrorMessage("Incorrect username or password. Please try again.");
+        }
     }
 
   return (
@@ -35,6 +37,7 @@ function LoginPage() {
                 <input onChange={(e) => setPassword(e.target.value)} type="password" className='input-box' placeholder='Password'/>
             <button onClick={handleLogin} className='login-button'>Sign in</button>
             <button className='forgot-password-button'>Forgot password?</button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
             <h4>Don't have an account? <Link to='/register' className='sign-up-link'>Sign up</Link></h4> 
             </label>
         </form>
