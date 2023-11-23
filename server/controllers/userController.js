@@ -10,6 +10,19 @@ const sampleController = {
   }
 };
 
+const verify = async (req, res) => {
+  const { username, verified } = req.body
+
+  const user = await User.findOne({username: username})
+
+  if(!user.verified) {
+    await User.findOneAndUpdate({username: username}, {verified: true})
+    return res.status(200).json('user verified')
+  }
+
+  return res.status(200).json('user already verified') 
+}
+
 const createUser = async (req, res) => {
   const {firstName, lastName, email, username, password, followers, following, verified} = req.body
 
@@ -97,5 +110,6 @@ module.exports = {
   loginUser,
   deleteUser,
   updatePassword,
-  seeUserStats
+  seeUserStats,
+  verify
 };

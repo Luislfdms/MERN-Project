@@ -6,7 +6,8 @@ const {
   loginUser,
   deleteUser,
   seeUserStats,
-  updatePassword
+  updatePassword,
+  verify
 } = require('../controllers/userController');
 
 router.use(cors());
@@ -20,6 +21,8 @@ router.delete('/delete', deleteUser);
 
 router.get('/user', seeUserStats);
 
-router.patch('/updatePass', updatePassword)
+router.patch('/updatePass', updatePassword);
+ 
+router.patch('/verify', verify);
 
 module.exports = (router);
