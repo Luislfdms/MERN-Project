@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Post = require('../models/postModel')
 const User = require('../models/userModel')
+const emailValidation = require('../nodeMailer/nodeMailer')
 
 const sampleController = {
   getSampleData: (req, res) => {
@@ -18,6 +19,7 @@ const createUser = async (req, res) => {
   if(!testUser) {
     try {
       const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
+      emailValidation(email)
       return res.status(200).json('user created')
     } catch (error) {
       return res.status(400).json({error: error.message})
