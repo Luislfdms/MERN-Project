@@ -1,10 +1,11 @@
 const nodeMailer = require('nodemailer')
 
-const html = `
-  <h1>This is an example email</h1>
-`;
+async function main(email, username) {
 
-async function main(email) {
+  const html = `
+  <h1>Click this link to verify your account</h1>
+  <a href="https://mern-project-barker-ceabe269d73c.herokuapp.com/">Click me to verify!</a>
+`;
 
   const transporter = nodeMailer.createTransport({
     host: 'smtp.gmail.com',
