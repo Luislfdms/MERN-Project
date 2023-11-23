@@ -11,12 +11,12 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         //Having trouble trying to get this to connect, saying 404 error, I'm probably doing something wrong
-        // try {
-        //     const res = await axios.post("/login", {username, password});
-        //     console.log("res", res.data)
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const res = await axios.get("/server/login", {username, password});
+            console.log("res", res.data)
+        } catch (err) {
+            console.log(err);
+        }
     }
 
   return (
@@ -34,7 +34,7 @@ function LoginPage() {
                 <p className='login-text'>Password</p>
                 <input onChange={(e) => setPassword(e.target.value)} type="password" className='input-box' placeholder='Password'/>
             <button onClick={handleLogin} className='login-button'>Sign in</button>
-            <button className='forgot-password-button'>Forgot password?</button>
+            {/* <button className='forgot-password-button'>Forgot password?</button> */}
             <h4>Don't have an account? <Link to='/register' className='sign-up-link'>Sign up</Link></h4> 
             </label>
         </form>

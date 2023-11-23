@@ -56,6 +56,7 @@ h1 {
     justify-content: center;
     flex-direction: column;
     opacity: 1;
+    overflow: hidden;
 }
 
 .input-container {
@@ -63,6 +64,7 @@ h1 {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 70vw;
 }
 
 .register-button {
@@ -101,7 +103,6 @@ h1 {
 .register-text {
     overflow: hidden;
     padding: none;
-    /* margin-right: 80%; */
     font-weight: bold;
     color: rgba(241,73,68,255);
     opacity: 1;
