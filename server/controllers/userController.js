@@ -14,6 +14,7 @@ const createUser = async (req, res) => {
 
   //add user to db
   const testUser = await User.findOne({username: username})
+  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following);
   if(!testUser) {
     try {
       const user = await User.create({firstName, lastName, email, username, password, followers, following})

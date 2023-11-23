@@ -26,7 +26,7 @@ mongoose.connect(config.mongoURI)
 app.use('/postAPI', postAPIRoutes);
 app.use('/userAPI', userAPIRoutes)
 
-if (process.env.NODE_ENV === 'production') {
+if ('production' === 'production') {
   // Set static folder
   app.use(express.static(path.join(__dirname, '../client/build')));
 
