@@ -29,7 +29,11 @@ const userSchema = new Schema({
   }],
   following: [{
     type: String
-  }]
+  }],
+  verified: {
+    type: Boolean,
+    required: false
+  }
 }, { timestamps: true })
 
 userSchema.pre('save', async function (next) {

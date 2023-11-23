@@ -10,15 +10,15 @@ const sampleController = {
 };
 
 const createUser = async (req, res) => {
-  const {firstName, lastName, email, username, password, followers, following} = req.body
+  const {firstName, lastName, email, username, password, followers, following, verified} = req.body
 
   //add user to db
   const testUser = await User.findOne({username: username})
-  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following);
+  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
     try {
-      const user = await User.create({firstName, lastName, email, username, password, followers, following})
-      return res.status(200).json(user)
+      const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
+      return res.status(200).json('user created')
     } catch (error) {
       return res.status(400).json({error: error.message})
     }
@@ -36,6 +36,10 @@ const loginUser = async (req, res) => {
   // User auth
   if(!user) {
     return res.status(400).json({error: 'COULD NOT FIND USER'})
+  }
+
+  if(!user.verified) {
+    return res.status(400).json({error: 'DENIED ACCESS: VERIFY EMAIL'})
   }
 
   passStatus = await bcrypt.compare(password, user.password)
