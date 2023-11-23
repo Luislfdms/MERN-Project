@@ -12,11 +12,9 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
-    "install:backend": "cd server && npm install",
-    "install:frontend": "cd client && npm install",
-    "start:backend": "cd server && node server.js",
-    "start:frontend": "cd client && npm start",
-    "start:all": "concurrently \"npm run install:backend\" \"npm run install:frontend\" \"npm run start:backend\" \"npm run start:frontend\""
+    "heroku-prebuild": "cd client && npm install", 
+    "start": "node server.js",  
+    "heroku-postbuild": "cd server && npm install" 
   }
 }
 
