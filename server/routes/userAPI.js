@@ -24,7 +24,7 @@ router.get('/user', seeUserStats);
 
 router.patch('/updatePass', updatePassword);
  
-router.patch('/verify/:username', verify);
+router.get('/verify', verify);
 
 router.get('/nodemailer', nodeMailer);
 
