@@ -1,14 +1,29 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-const emailValidation = require('../nodeMailer/nodeMailer')
+import axios from "axios";
+const emailValidation = require('/userAPI/nodemailer')
 
 const Success = ({ values }) => {
   const resendValidation = () => {
-    // Place the logic for email validation here
     emailValidation(values.email, values.username)
-    console.log('Email validation triggered!');
-    // You can make an API call to your server to handle email validation
+    console.log('Email validation triggered!')
   };
+
+  const handleVerification = () => {
+    const response = axios.patch('/userAPI/verify', {
+      email: values.email,
+      username: values.username
+    })
+    if (response.statusText === 'user verified') {
+      // Redirect to the sign-in page
+      history.push('/login');
+    }
+  };
+
+  // Call the handleVerification function when the component mounts
+  React.useEffect(() => {
+    handleVerification();
+  }, []); 
 
   return (
     <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
@@ -23,7 +38,7 @@ const Success = ({ values }) => {
             If you haven't received the email, you can request a new one by clicking
             the "Resend Verification Email" link below.
             </p>
-            <button onClick={emailValidation}>Resend Verification Email</button>
+            <button onClick={resendValidation}>Resend Verification Email</button>
           </label>
       </body>
     </div>

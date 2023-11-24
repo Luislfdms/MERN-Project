@@ -4,7 +4,6 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from "axios";
-const emailValidation = require('../nodeMailer/nodeMailer')
 
 const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
 
@@ -22,7 +21,6 @@ const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
       })
 
       if (response.status === 200) {
-        emailValidation(email, username);
         nextStep();
       } else {
         console.log('Unexpected status code:', response.status);
@@ -67,7 +65,7 @@ const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
                 />
                 <p className='register-text'>Password</p>
                 <input 
-                  type="text" 
+                  type="password" 
                   className='input-box' 
                   placeholder='password'
                   value={values.password}
