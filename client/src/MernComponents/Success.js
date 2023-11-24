@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
-const emailValidation = require('/userAPI/nodemailer')
 
 const Success = ({ values }) => {
   const resendValidation = () => {
-    emailValidation(values.email, values.username)
+    const emailValidation = axios.get('/userAPI/nodemailer', {
+      email: values.email,
+      uesrname: values.username
+    })
     console.log('Email validation triggered!')
   };
 
