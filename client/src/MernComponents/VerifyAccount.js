@@ -4,10 +4,10 @@ import axios from 'axios';
 
 const VerifyAccount = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
+  const { username } = useParams();
   console.log('In verify account')
 
   useEffect(() => {
-    const { username } = useParams();
     console.log('Username:', username);
     const verifyUser = async () => {
       try {
