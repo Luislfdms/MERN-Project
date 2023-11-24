@@ -13,10 +13,12 @@ const sampleController = {
 const verify = async (req, res) => {
   const { username } = req.params; 
 
+  console.log('in verify')
   const user = await User.findOne({ username });
 
   if (user) {
     if (!user.verified) {
+      console.log('updating user')
       // Mark the user as verified
       await User.findOneAndUpdate({ username }, { verified: true });
       return res.redirect('/login');
