@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 const Success = ({ values }) => {
+
   const resendValidation = () => {
     const emailValidation = axios.get('/userAPI/nodemailer', {
       email: values.email,
@@ -10,22 +11,6 @@ const Success = ({ values }) => {
     })
     console.log('Email validation triggered!')
   };
-
-  const handleVerification = () => {
-    const response = axios.patch('/userAPI/verify', {
-      email: values.email,
-      username: values.username
-    })
-    if (response.statusText === 'user verified') {
-      // Redirect to the sign-in page
-      history.push('/login');
-    }
-  };
-
-  // Call the handleVerification function when the component mounts
-  React.useEffect(() => {
-    handleVerification();
-  }, []); 
 
   return (
     <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
