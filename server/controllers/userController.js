@@ -23,6 +23,16 @@ const verify = async (req, res) => {
   return res.status(200).json('user already verified') 
 }
 
+const nodeMailer = async(req, res) => {
+  const {email, username} = req.body
+  const testUser = await User.findOne({username: username, email: email})
+  if(testUser){
+    emailValidation(email, username)
+    return res.status(200).json('email sent')
+  }
+  return res.status(400).json('USER DNE')
+}
+
 const createUser = async (req, res) => {
   const {firstName, lastName, email, username, password, followers, following} = req.body
 
@@ -116,5 +126,6 @@ module.exports = {
   deleteUser,
   updatePassword,
   seeUserStats,
-  verify
+  verify,
+  nodeMailer
 };

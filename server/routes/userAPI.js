@@ -7,7 +7,8 @@ const {
   deleteUser,
   seeUserStats,
   updatePassword,
-  verify
+  verify,
+  nodeMailer
 } = require('../controllers/userController');
 
 router.use(cors());
@@ -24,5 +25,7 @@ router.get('/user', seeUserStats);
 router.patch('/updatePass', updatePassword);
  
 router.patch('/verify', verify);
+
+router.get('/nodemailer', nodeMailer);
 
 module.exports = (router);
