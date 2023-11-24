@@ -6,11 +6,11 @@ const VerifyAccount = ({ match }) => {
 
   useEffect(() => {
     const { username } = match.params;
-
+    console.log('in use effect')
     const verifyUser = async () => {
       try {
         const response = await axios.post(`userAPI/verify`, { username });
-
+        console.log(username)
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
         } else {

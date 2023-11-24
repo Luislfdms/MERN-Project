@@ -21,7 +21,7 @@ const verify = async (req, res) => {
       console.log('updating user')
       // Mark the user as verified
       await User.findOneAndUpdate({ username }, { verified: true });
-      return res.redirect('/login');
+      return res.status(200).json('User verified');
     } else {
       return res.status(400).json('User already verified');
     }
