@@ -11,7 +11,7 @@ const sampleController = {
 };
 
 const verify = async (req, res) => {
-  const { username } = req.params; 
+  const { username } = req.query || req.body; 
 
   const user = await User.findOne({ username: username });
   console.log('Username verify: ', username)
@@ -28,7 +28,6 @@ const verify = async (req, res) => {
   } else {
     return res.status(404).json('User not found');
   }
-
 }
 
 const nodeMailer = async(req, res) => {
