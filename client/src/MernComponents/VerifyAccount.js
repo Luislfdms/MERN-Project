@@ -11,7 +11,9 @@ const VerifyAccount = () => {
     console.log('Username:', username);
     const verifyUser = async () => {
       try {
-        const response = await axios.post(`/userAPI/verify`, { username });
+        const response = await axios.post(`/userAPI/verify`, { 
+          username: username 
+        });
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
         } else {
