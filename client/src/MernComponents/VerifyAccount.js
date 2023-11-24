@@ -9,7 +9,7 @@ const VerifyAccount = ({ match }) => {
 
     const verifyUser = async () => {
       try {
-        const response = await axios.post(`/verify`, { username });
+        const response = await axios.post(`userAPI/verify`, { username });
 
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
@@ -27,8 +27,7 @@ const VerifyAccount = ({ match }) => {
 
   return (
     <div>
-      <h1>Verification Status</h1>
-      <p>{verificationStatus}</p>
+      <h1>verifying</h1>
     </div>
   );
 };
