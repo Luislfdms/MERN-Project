@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const VerifyAccount = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
   const { username } = useParams();
+  const navigate = useNavigate();
   console.log('In verify account')
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const VerifyAccount = () => {
         const response = await axios.get(`/userAPI/verify?username=${username}`);
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
+          navigate('/login')
         } else {
           setVerificationStatus('Failed to verify user');
         }
