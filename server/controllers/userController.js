@@ -29,6 +29,7 @@ const createUser = async (req, res) => {
   //add user to db
   const testUser = await User.findOne({username: username})
   const testEmail = await User.findOne({email: email})
+  verified = false;
   console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
     if(!testEmail){
