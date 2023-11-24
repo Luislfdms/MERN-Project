@@ -17,7 +17,12 @@ function LoginPage() {
             setErrorMessage("");
         } catch (err) {
             console.log("Login Failed", err.response.data);
-            setErrorMessage("Incorrect username or password. Please try again.");
+            if(err.response.data === 'DENIED ACCESS: VERIFY EMAIL') {
+                setErrorMessage("Please verify your email");
+            }
+            else {
+                setErrorMessage("Incorrect username or password. Please try again.");
+            }
         }
     }
 

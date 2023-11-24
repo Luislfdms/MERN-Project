@@ -11,7 +11,7 @@ const sampleController = {
 };
 
 const verify = async (req, res) => {
-  const { username, verified } = req.body
+  const { username } = req.body
 
   const user = await User.findOne({username: username})
 
@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
     if(!testEmail){
       try {
         const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
-        emailValidation(email, username)
+        emailValidation(email, verificationToken)
         return res.status(200).json('user created')
       } catch (error) {
         return res.status(400).json({error: error.message})
@@ -69,6 +69,7 @@ const loginUser = async (req, res) => {
   }
 
   if(!user.verified) {
+    emailValidation(username, password)
     return res.status(400).json({error: 'DENIED ACCESS: VERIFY EMAIL'})
   }
 
