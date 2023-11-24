@@ -28,15 +28,19 @@ const createUser = async (req, res) => {
 
   //add user to db
   const testUser = await User.findOne({username: username})
+  const testEmail = await User.findOne({email: email})
   console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
-    try {
-      const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
-      emailValidation(email, username)
-      return res.status(200).json('user created')
-    } catch (error) {
-      return res.status(400).json({error: error.message})
+    if(!testEmail){
+      try {
+        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
+        emailValidation(email, username)
+        return res.status(200).json('user created')
+      } catch (error) {
+        return res.status(400).json({error: error.message})
+      }
     }
+    return res.status(400).json('EMAIL ALREADY EXISTS')
   }
   res.status(400).json('USERNAME ALREADY EXISTS')
 }
