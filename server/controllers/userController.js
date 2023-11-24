@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
     if(!testEmail){
       try {
         const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
-        emailValidation(email, username)
+        //emailValidation(email, username)
         return res.status(200).json('user created')
       } catch (error) {
         return res.status(400).json({error: error.message})

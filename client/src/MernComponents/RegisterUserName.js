@@ -4,6 +4,7 @@ import "./Register.css";
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import axios from "axios";
+const emailValidation = require('../nodeMailer/nodeMailer')
 
 const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
 
@@ -21,6 +22,7 @@ const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
       })
 
       if (response.status === 200) {
+        emailValidation(email, username);
         nextStep();
       } else {
         console.log('Unexpected status code:', response.status);

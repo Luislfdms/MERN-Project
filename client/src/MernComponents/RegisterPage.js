@@ -56,15 +56,9 @@ export default class RegisterPage extends Component {
         )
       case 3:
         return (
-          <Confirmation 
-            prevStep = { this.prevStep }
-            nextStep = { this.nextStep }
+          <Success 
             values = { values }
           />
-        )
-      case 4:
-        return (
-          <Success />
         )
       default:
     }
