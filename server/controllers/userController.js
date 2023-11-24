@@ -11,12 +11,21 @@ const sampleController = {
 };
 
 const verify = async (req, res) => {
-  const { username } = req.body
+  const { username } = req.params; 
 
-  const user = await User.findOne({username: username})
+  const user = await User.findOne({ username });
 
-  await User.findOneAndUpdate({username: username}, {verified: true})
-  return res.redirect('/login');
+  if (user) {
+    if (!user.verified) {
+      // Mark the user as verified
+      await User.findOneAndUpdate({ username }, { verified: true });
+      return res.redirect('/login');
+    } else {
+      return res.status(400).json('User already verified');
+    }
+  } else {
+    return res.status(404).json('User not found');
+  }
 
 }
 
