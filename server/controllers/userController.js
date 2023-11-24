@@ -13,8 +13,8 @@ const sampleController = {
 const verify = async (req, res) => {
   const { username } = req.params; 
 
-  console.log('in verify')
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username: username });
+  console.log('Username verify: ', username)
 
   if (user) {
     if (!user.verified) {
