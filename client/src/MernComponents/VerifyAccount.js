@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const VerifyAccount = ({ match }) => {
+const VerifyAccount = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
+  console.log('In verify account')
 
   useEffect(() => {
-    const { username } = match.params;
-    console.log('in use effect')
+    const { username } = useParams();
+    console.log('Username:', username);
     const verifyUser = async () => {
       try {
-        const response = await axios.post(`userAPI/verify`, { username });
-        console.log(username)
+        const response = await axios.post(`/userAPI/verify`, { username });
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
         } else {
@@ -23,11 +24,12 @@ const VerifyAccount = ({ match }) => {
     };
 
     verifyUser();
-  }, [match.params]);
+  }, [username]);
 
   return (
     <div>
       <h1>verifying</h1>
+      <p>{ verificationStatus }</p>
     </div>
   );
 };
