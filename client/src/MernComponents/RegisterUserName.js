@@ -17,8 +17,7 @@ const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
         firstName: values.firstName,
         lastName: values.lastName,
         followers: [],
-        following: [],
-        verified: false
+        following: []
       })
 
       if (response.status === 200) {

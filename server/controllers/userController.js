@@ -24,12 +24,12 @@ const verify = async (req, res) => {
 }
 
 const createUser = async (req, res) => {
-  const {firstName, lastName, email, username, password, followers, following, verified} = req.body
+  const {firstName, lastName, email, username, password, followers, following} = req.body
 
   //add user to db
   const testUser = await User.findOne({username: username})
   const testEmail = await User.findOne({email: email})
-  verified = false;
+  const verified = false;
   console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
     if(!testEmail){
