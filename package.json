@@ -12,7 +12,7 @@
     "node": "^20.9.0"
   },
   "scripts": {
-    "heroku-prebuild": "cd client && npm install",
+    "heroku-prebuild": "cd client && npm install && npm build",
     "start": "node server.js",
     "heroku-postbuild": "cd server && npm install"
   }
