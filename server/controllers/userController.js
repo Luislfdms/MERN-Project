@@ -15,12 +15,12 @@ const verify = async (req, res) => {
 
   const user = await User.findOne({username: username})
 
-  if(!user.verified) {
+  if(user.verified === false) {
     await User.findOneAndUpdate({username: username}, {verified: true})
-    return res.status(200).json('user verified')
+    return res.redirect('/login');
   }
 
-  return res.status(200).json('user already verified') 
+  return res.redirect('/login'); 
 }
 
 const nodeMailer = async(req, res) => {
@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
     if(!testEmail){
       try {
         const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
-        emailValidation(email, username)
+        await emailValidation(email, username)
         return res.status(200).json('user created')
       } catch (error) {
         return res.status(400).json({error: error.message})
