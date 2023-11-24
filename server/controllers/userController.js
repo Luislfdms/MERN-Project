@@ -15,12 +15,9 @@ const verify = async (req, res) => {
 
   const user = await User.findOne({username: username})
 
-  if(user.verified === false) {
-    await User.findOneAndUpdate({username: username}, {verified: true})
-    return res.redirect('/login');
-  }
+  await User.findOneAndUpdate({username: username}, {verified: true})
+  return res.redirect('/login');
 
-  return res.redirect('/login'); 
 }
 
 const nodeMailer = async(req, res) => {
