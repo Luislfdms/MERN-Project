@@ -106,5 +106,6 @@ module.exports = {
   upvote,
   downvote,
   viewFollowerPosts,
-  allFollowerPosts
+  allFollowerPosts,
+  getTitlePosts
 };
