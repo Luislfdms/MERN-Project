@@ -12,6 +12,7 @@ const createPost = async (req, res) => {
   const {postTitle, postMain, userID, image, upvotes, downvotes} = req.body
 
   //add post to db
+  console.log(req.body)
   const user = await User.findOne({username: userID})
   if(user) {
     try {

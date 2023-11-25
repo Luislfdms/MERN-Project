@@ -15,9 +15,9 @@ import { useDispatch } from 'react-redux';
 
 function HomePage() {
   const [info, setInfo] = useState(null);
-  const [username, setUserName] = useState("lulu");
-  const [title, setTitle] = useState("");
-  const [post, setPost] = useState("");
+  // const [username, setUserName] = useState("");
+  const [postMain, setTitle] = useState("");
+  const [postTitle, setPost] = useState("");
   const [upvotes, setUpvotes] = useState("");
   const [downvotes, setDownvotes] = useState("");
   const [image, setImage] = useState("");
@@ -26,15 +26,15 @@ function HomePage() {
 
 
   const start = useSelector((state) => state.user.start);
-  const user = useSelector((state) => state.user.user);
+  const userID = useSelector((state) => state.user.user);
   const currentUser = useSelector((state) => state.currentUser);
 
 
   const handlePost = async (e) => {
     e.preventDefault();
     try {
-        console.log(user);
-        const response = await axios.post("/postAPI/add", {title, post, user, image, upvotes, downvotes});
+        console.log(userID);
+        const response = await axios.post("/postAPI/add", {postTitle, postMain, userID, image, upvotes, downvotes});
         console.log("Post was successful", response);
     } catch (err) {
         console.log("Failed to post", err.response.data);
