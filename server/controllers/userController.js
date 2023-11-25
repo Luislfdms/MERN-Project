@@ -156,7 +156,7 @@ const unfollowUser = async (req, res) => {
   const requested_user = users.find(user => user.username.includes(requested))
 
   await User.findOneAndUpdate({username: currentUser.username}, {$pull: {following: requested_user.username}})
-  await User.findOneAndUpdate({username: requested_user.username}, {$pull: {follower: currentUser.username}})
+  await User.findOneAndUpdate({username: requested_user.username}, {$pull: {followers: currentUser.username}})
 
   return res.status(200).json('User unfollowed')
 }
