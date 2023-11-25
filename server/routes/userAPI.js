@@ -29,4 +29,6 @@ router.get('/verify', verify);
 
 router.get('/nodemailer', nodeMailer);
 
+router.patch('/follow', followUser);
+
 module.exports = (router);

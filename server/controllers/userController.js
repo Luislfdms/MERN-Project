@@ -128,21 +128,20 @@ const seeUserStats = async (req, res) => {
 }
 
 const followUser = async (req, res) => {
-  const {currentUser, username} = req.body
+  const {username, requested} = req.body
+  const users = await User.find({username: {$in: [username, requested]}})
 
-  const user = await User.findOne({currentUser: currentUser})
-  const follow_user = await User.findOne({username: username})
-
-  if(!user) {
-    return res.status(400).json({error: 'COULD NOT FIND USER'})
+  if(!users || users.length !== 2) {
+    return res.status(400).json({error: 'COULD NOT FIND USER(S)'})
   }
 
-  if(!follow_user) {
-    return res.status(400).json({error: 'SEARCH FOR USER TO FOLLOW FAILED'})
-  }
+  const currentUser = users.find(user => user.username.includes(username))
+  const requested_user = users.find(user => user.username.includes(requested))
 
-  user.following.push(follow_user)
-  res.status(200).json('New user followed successfully')
+  await User.findOneAndUpdate({username: currentUser.username}, {$push: {following: requested_user.username}}, {new: true})
+  await User.findOneAndUpdate({username: requested_user.username}, {$push: {followers: currentUser.username}}, {new: true})
+
+  return res.status(200).json('User followed')
 }
 
 module.exports = {
