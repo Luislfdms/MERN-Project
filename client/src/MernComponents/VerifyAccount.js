@@ -4,15 +4,15 @@ import axios from 'axios';
 
 const VerifyAccount = () => {
   const [verificationStatus, setVerificationStatus] = useState('');
-  const { username } = useParams();
+  const { verificationToken } = useParams();
   const navigate = useNavigate();
   console.log('In verify account')
 
   useEffect(() => {
-    console.log('Username:', username);
+    console.log('verificationToken:', verificationToken);
     const verifyUser = async () => {
       try {
-        const response = await axios.get(`/userAPI/verify?username=${username}`);
+        const response = await axios.get(`/userAPI/verify?verificationToken=${verificationToken}`);
         if (response.status === 200) {
           setVerificationStatus('User verified successfully');
           navigate('/login')
@@ -26,7 +26,7 @@ const VerifyAccount = () => {
     };
 
     verifyUser();
-  }, [username]);
+  }, [verificationToken]);
 
   return (
     <div>

@@ -19,7 +19,7 @@ const verify = async (req, res) => {
   const { verificationToken } = req.query || req.body; 
 
   const user = await User.findOne({ verificationToken});
-  console.log('Username verify: ', user.username)
+  console.log('VerificationToken verify: ', verificationToken)
 
   if (user) {
     if (!user.verified) {
