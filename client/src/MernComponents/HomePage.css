@@ -21,6 +21,7 @@
 .main-feed {
     width: 40vw;
     border: none;
+    background-color: white;
 }
 
 .quick-post-feed {
@@ -58,6 +59,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 30px;
+    background-color: white;
 }
 
 .post-body {
@@ -86,7 +88,7 @@
     opacity: 1;
     font-weight: bold;
     color: white;
-    font-size: large;
+    font-size: 1.5vw;
 }
 .nav-buttons {
     background-color: rgba(45,45,45,255);

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./TableRow.css";
 // import "/Images/noun-paw-5940362 (2).svg"
+// import
 
 function TableRow() {
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
+  const [feed, setFeed] = useState(null);
+
+
 
   const handleUpVote = (e) => {
     setUpvoted(true);
@@ -24,9 +28,9 @@ function TableRow() {
             <h2 className="post-title">Theory of relativity</h2>
             <p>What is the theory of relativity and how does it relate to everyones everyday life?</p>
             <div className="votes-container">
-            <img onClick={() => {handleUpVote()}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362 (2).svg" alt="clifford-logo"></img>
+            <img onClick={() => {handleUpVote()}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="clifford-logo"></img>
             <p>10</p>
-            <img onClick={() => {handleDownVote()}} role="button" className='dog-paw-image-down' src="/Images/noun-paw-5940362 (5).svg" alt="clifford-logo"></img>
+            <img onClick={() => {handleDownVote()}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="clifford-logo"></img>
             <p>5</p>
             </div>
         </div>

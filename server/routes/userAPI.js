@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
 const {
   createUser,
   loginUser,
@@ -8,10 +9,12 @@ const {
   updatePassword
 } = require('../controllers/userController');
 
+router.use(cors());
+
 // Define routes
 router.post('/register', createUser);
 
-router.get('/login', loginUser);
+router.post('/login', loginUser);
 
 router.delete('/delete', deleteUser);
 
