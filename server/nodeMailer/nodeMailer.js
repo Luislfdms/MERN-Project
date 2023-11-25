@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const nodeMailer = require('nodemailer')
 
 async function main(email, verificationToken) {
@@ -12,8 +14,8 @@ async function main(email, verificationToken) {
     port: '465',
     secure: true,
     auth: {
-      user: 'thebarkauth@gmail.com',
-      pass: 'sjmt wvjx czoy nuzy'
+      user: 'NODE_USERNAME',
+      pass: 'NODE_PASS'
     }
   });
 
