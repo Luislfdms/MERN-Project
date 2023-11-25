@@ -138,6 +138,12 @@ const followUser = async (req, res) => {
   const currentUser = users.find(user => user.username.includes(username))
   const requested_user = users.find(user => user.username.includes(requested))
 
+  const isFollowing = currentUser.following.includes(requested_user.username);
+
+  if(isFollowing) {
+    return res.status(400).json({error: 'USER IS ALREADY FOLLOWING REQUESTED USER'})
+  }
+
   await User.findOneAndUpdate({username: currentUser.username}, {$push: {following: requested_user.username}}, {new: true})
   await User.findOneAndUpdate({username: requested_user.username}, {$push: {followers: currentUser.username}}, {new: true})
 
@@ -154,6 +160,12 @@ const unfollowUser = async (req, res) => {
 
   const currentUser = users.find(user => user.username.includes(username))
   const requested_user = users.find(user => user.username.includes(requested))
+
+  const isFollowing = currentUser.following.includes(requested_user.username);
+
+  if(!isFollowing) {
+    return res.status(400).json({error: 'USER IS NOT FOLLOWING REQUESTED USER'})
+  }
 
   await User.findOneAndUpdate({username: currentUser.username}, {$pull: {following: requested_user.username}})
   await User.findOneAndUpdate({username: requested_user.username}, {$pull: {followers: currentUser.username}})
