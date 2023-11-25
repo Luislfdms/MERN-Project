@@ -37,6 +37,12 @@ const getUserPosts = async (req, res) => {
   res.status(200).json(posts)
 }
 
+const viewFollowerPosts = async (req, res) => {
+  const {username} = req.body
+  const posts = await Post.find({userID: username}).sort({createdAt: -1})
+  res.status(200).json(posts)
+}
+
 const deletePosts = async (req, res) => {
   const { id } = req.body
 
@@ -83,5 +89,6 @@ module.exports = {
   deletePosts,
   getUserPosts,
   upvote,
-  downvote
+  downvote,
+  viewFollowerPosts
 };
