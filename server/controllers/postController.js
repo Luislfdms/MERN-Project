@@ -43,6 +43,14 @@ const viewFollowerPosts = async (req, res) => {
   res.status(200).json(posts)
 }
 
+const allFollowerPosts = async (req, res) => {
+  const {username} = req.body
+  const user = await User.findOne({username: username})
+  const following = user.following
+  const posts = await Post.find({userID: {$in: following}}).sort({createdAt: -1})
+  res.status(200).json(posts)
+}
+
 const deletePosts = async (req, res) => {
   const { id } = req.body
 
@@ -90,5 +98,6 @@ module.exports = {
   getUserPosts,
   upvote,
   downvote,
-  viewFollowerPosts
+  viewFollowerPosts,
+  allFollowerPosts
 };
