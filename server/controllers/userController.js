@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Post = require('../models/postModel')
 const User = require('../models/userModel')
+const emailValidation = require('../nodeMailer/nodeMailer')
 
 const sampleController = {
   getSampleData: (req, res) => {
@@ -9,18 +10,55 @@ const sampleController = {
   }
 };
 
+const verify = async (req, res) => {
+  const { username } = req.query || req.body; 
+
+  const user = await User.findOne({ username: username });
+  console.log('Username verify: ', username)
+
+  if (user) {
+    if (!user.verified) {
+      console.log('updating user')
+      // Mark the user as verified
+      await User.findOneAndUpdate({ username }, { verified: true });
+      return res.status(200).json('User verified');
+    } else {
+      return res.status(400).json('User already verified');
+    }
+  } else {
+    return res.status(404).json('User not found');
+  }
+}
+
+const nodeMailer = async(req, res) => {
+  const {email, username} = req.body
+  const testUser = await User.findOne({username: username, email: email})
+  if(testUser){
+    emailValidation(email, username)
+    return res.status(200).json('email sent')
+  }
+  return res.status(400).json('USER DNE')
+}
+
 const createUser = async (req, res) => {
   const {firstName, lastName, email, username, password, followers, following} = req.body
 
   //add user to db
   const testUser = await User.findOne({username: username})
+  const testEmail = await User.findOne({email: email})
+  const verified = false;
+  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
-    try {
-      const user = await User.create({firstName, lastName, email, username, password, followers, following})
-      return res.status(200).json(user)
-    } catch (error) {
-      return res.status(400).json({error: error.message})
+    if(!testEmail){
+      try {
+        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
+        await emailValidation(email, username)
+        return res.status(200).json('user created')
+      } catch (error) {
+        return res.status(400).json({error: error.message})
+      }
     }
+    return res.status(400).json('EMAIL ALREADY EXISTS')
   }
   res.status(400).json('USERNAME ALREADY EXISTS')
 }
@@ -35,6 +73,11 @@ const loginUser = async (req, res) => {
   // User auth
   if(!user) {
     return res.status(400).json({error: 'COULD NOT FIND USER'})
+  }
+
+  if(!user.verified) {
+    emailValidation(username, password)
+    return res.status(400).json({error: 'DENIED ACCESS: VERIFY EMAIL'})
   }
 
   passStatus = await bcrypt.compare(password, user.password)
@@ -90,5 +133,7 @@ module.exports = {
   loginUser,
   deleteUser,
   updatePassword,
-  seeUserStats
+  seeUserStats,
+  verify,
+  nodeMailer
 };
