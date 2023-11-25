@@ -8,7 +8,8 @@ const {
   seeUserStats,
   updatePassword,
   verify,
-  nodeMailer
+  nodeMailer,
+  followUser
 } = require('../controllers/userController');
 
 router.use(cors());

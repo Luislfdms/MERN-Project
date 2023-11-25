@@ -127,6 +127,23 @@ const seeUserStats = async (req, res) => {
   res.status(200).json(user)
 }
 
+const followUser = async (req, res) => {
+  const {currentUser, username} = req.body
+
+  const user = await User.findOne({currentUser: currentUser})
+  const follow_user = await User.findOne({username: username})
+
+  if(!user) {
+    return res.status(400).json({error: 'COULD NOT FIND USER'})
+  }
+
+  if(!follow_user) {
+    return res.status(400).json({error: 'SEARCH FOR USER TO FOLLOW FAILED'})
+  }
+
+  user.following.push(follow_user)
+  res.status(200).json('New user followed successfully')
+}
 
 module.exports = {
   createUser,
@@ -135,5 +152,6 @@ module.exports = {
   updatePassword,
   seeUserStats,
   verify,
-  nodeMailer
+  nodeMailer,
+  followUser
 };
