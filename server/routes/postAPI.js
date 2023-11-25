@@ -7,7 +7,8 @@ const {
   getUserPosts,
   downvote,
   upvote,
-  viewFollowerPosts
+  viewFollowerPosts,
+  allFollowerPosts
 } = require('../controllers/postController');
 
 // Define routes
@@ -24,5 +25,7 @@ router.patch('/downvote', downvote);
 router.patch('/upvote', upvote);
 
 router.get('/followerPosts', viewFollowerPosts);
+
+router.get('/allFollowerPosts', allFollowerPosts);
 
 module.exports = (router);
