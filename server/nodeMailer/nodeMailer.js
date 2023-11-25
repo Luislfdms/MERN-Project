@@ -1,10 +1,10 @@
 const nodeMailer = require('nodemailer')
 
-async function main(email, username) {
+async function main(email, verificationToken) {
 
   const html = `
   <h1>Click this link to verify your account</h1>
-  <a href="https://mern-project-barker-ceabe269d73c.herokuapp.com/verify/${username}">Click me to verify!</a>
+  <a href="https://mern-project-barker-ceabe269d73c.herokuapp.com/verify/${verificationToken}">Click me to verify!</a>
 `;
 
   const transporter = nodeMailer.createTransport({

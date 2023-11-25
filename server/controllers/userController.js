@@ -3,6 +3,11 @@ const bcrypt = require('bcrypt')
 const Post = require('../models/postModel')
 const User = require('../models/userModel')
 const emailValidation = require('../nodeMailer/nodeMailer')
+const crypto = require('crypto');
+
+function generateVerificationToken() {
+  return crypto.randomBytes(32).toString('hex');
+}
 
 const sampleController = {
   getSampleData: (req, res) => {
@@ -11,16 +16,16 @@ const sampleController = {
 };
 
 const verify = async (req, res) => {
-  const { username } = req.query || req.body; 
+  const { verificationToken } = req.query || req.body; 
 
-  const user = await User.findOne({ username: username });
-  console.log('Username verify: ', username)
+  const user = await User.findOne({ verificationToken});
+  console.log('Username verify: ', user.username)
 
   if (user) {
     if (!user.verified) {
       console.log('updating user')
       // Mark the user as verified
-      await User.findOneAndUpdate({ username }, { verified: true });
+      await User.findOneAndUpdate({ verificationToken }, { verified: true });
       return res.status(200).json('User verified');
     } else {
       return res.status(400).json('User already verified');
@@ -31,10 +36,10 @@ const verify = async (req, res) => {
 }
 
 const nodeMailer = async(req, res) => {
-  const {email, username} = req.body
-  const testUser = await User.findOne({username: username, email: email})
+  const {email, verificationToken} = req.body
+  const testUser = await User.findOne({verificationToken: verificationToken, email: email})
   if(testUser){
-    emailValidation(email, username)
+    emailValidation(email, verificationToken)
     return res.status(200).json('email sent')
   }
   return res.status(400).json('USER DNE')
@@ -47,12 +52,13 @@ const createUser = async (req, res) => {
   const testUser = await User.findOne({username: username})
   const testEmail = await User.findOne({email: email})
   const verified = false;
+  const verificationToken = generateVerificationToken();
   console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
   if(!testUser) {
     if(!testEmail){
       try {
-        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified})
-        await emailValidation(email, username)
+        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified, verificationToken})
+        await emailValidation(email, verificationToken)
         return res.status(200).json('user created')
       } catch (error) {
         return res.status(400).json({error: error.message})

@@ -7,8 +7,9 @@ const Success = ({ values }) => {
   const resendValidation = () => {
     const emailValidation = axios.get('/userAPI/nodemailer', {
       email: values.email,
-      uesrname: values.username
+      username: values.username
     })
+    emailValidation()
     console.log('Email validation triggered!')
   };
 
