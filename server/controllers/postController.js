@@ -33,7 +33,7 @@ const getAllPosts = async (req, res) => {
 
 const getUserPosts = async (req, res) => {
   const {username} = req.body
-  const posts = await Post.find({userID: username}).sort({createdAt: -1})
+  const posts = await Post.find({userID: { $regex: username, $options: 'i'}}).sort({createdAt: -1})
   res.status(200).json(posts)
 }
 
