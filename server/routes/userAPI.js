@@ -10,7 +10,9 @@ const {
   verify,
   nodeMailer,
   followUser,
-  unfollowUser
+  unfollowUser,
+  viewFollowers,
+  viewFollowing
 } = require('../controllers/userController');
 
 router.use(cors());
@@ -33,5 +35,9 @@ router.get('/nodemailer', nodeMailer);
 router.patch('/follow', followUser);
 
 router.patch('/unfollow', unfollowUser);
+
+router.get('/followers', viewFollowers);
+
+router.get('/following', viewFollowing);
 
 module.exports = (router);
