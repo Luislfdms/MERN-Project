@@ -179,6 +179,13 @@ const unfollowUser = async (req, res) => {
   return res.status(200).json('User unfollowed')
 }
 
+const viewFollowers = async (req, res) => {
+  const {username} = req.body
+  const user = await User.findOne({username: username})
+  console.log(user.followers)
+  return res.status(200).json(user.followers)
+}
+
 module.exports = {
   createUser,
   loginUser,
@@ -188,5 +195,6 @@ module.exports = {
   verify,
   nodeMailer,
   followUser,
-  unfollowUser
+  unfollowUser,
+  viewFollowers
 };
