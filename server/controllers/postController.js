@@ -46,9 +46,7 @@ const viewFollowerPosts = async (req, res) => {
 const allFollowerPosts = async (req, res) => {
   const {username} = req.body
   const user = await User.findOne({username: username})
-  console.log(user)
   const following = user.following
-  console.log(following)
   const posts = await Post.find({userID: {$in: following}}).sort({createdAt: -1})
   res.status(200).json(posts)
 }
