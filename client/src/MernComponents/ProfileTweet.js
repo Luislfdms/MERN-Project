@@ -17,7 +17,7 @@ function ProfileTweet({tweet}) {
         // e.preventDefault();
         console.log(id);
         try {
-            const response = await axios.patch("/postAPI/upvote", id);
+            const response = await axios.patch("/postAPI/upvote", {id});
             console.log("upvote was successful", response);
         } catch (err) {
             console.log("Failed to upvote", err.response.data);
@@ -27,7 +27,7 @@ function ProfileTweet({tweet}) {
     const handleDownVote = async (id) => {
         // e.preventDefault();
         try {
-            const response = await axios.patch("/postAPI/downvote", id);
+            const response = await axios.patch("/postAPI/downvote", {id});
             console.log("downvote was successful", response);
         } catch (err) {
             console.log("Failed to downvote", err.response.data);
