@@ -4,7 +4,9 @@ const initialState = {
     start: false,
     user: null,
     currentUser: null,
-    page: 1
+    page: 1,
+    postId: {},
+    darkMode: false,
 };
 
 export const userSlice = createSlice ({
@@ -23,12 +25,22 @@ export const userSlice = createSlice ({
         page: (state, action) => {
             state.page = action.payload;
         },
+        postId: (state, action) => {
+            state.postId = action.payload;
+        },
+        darkMode: (state) => {
+            if (!state.darkMode) {
+                state.darkMode = true;
+            } else {
+                state.darkMode = false;
+            }
+        },
         logout: (state) => {
             return initialState;
         }
     },
 });
 
-export const {start, user, currentUser, page, logout} = userSlice.actions;
+export const {start, user, currentUser, page, postId, darkMode, logout} = userSlice.actions;
 
 export default userSlice.reducer;

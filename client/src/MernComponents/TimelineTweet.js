@@ -3,22 +3,29 @@ import axios from "axios";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
-import Tweet from './Tweet';
 import "./TimelineTweet.css";
+import { postId } from '../redux/userSlice.js';
+import { useDispatch } from 'react-redux';
+import HomeTweet from './HomeTweet.js'
+import ProfileTweet from './ProfileTweet.js'
+import FollowTweet from './FollowTweet.js'
 
 function TimelineTweet() {
     const [info, setInfo] = useState(null);
-    const [username, setUserName] = useState("");
     const [name, setName] = useState("");
     const [id, setId] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
   
     const page = useSelector((state) => state.user.page);
-    const currentUser = useSelector((state) => state.user.currentUser)
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const username = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
     
-    const handleUpVote = async (id) => {
+    const handleUpVote = async (e, id) => {
         // e.preventDefault();
         console.log(id);
         try {
+            console.log(id);
             const response = await axios.patch("/postAPI/upvote", id);
             console.log("upvote was successful", response);
         } catch (err) {
@@ -54,22 +61,20 @@ function TimelineTweet() {
         case 1:
             return (
             <>
-                {info && info.map((tweet) => {
-                    return     <div key={tweet._id} className="table-row">
-                    {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
-                    <div className="post-container">
-                        <h3 style={{margin: "0"}}>Profile Name</h3>
-                        <small style={{margin: "0"}}>@{tweet.userID}</small>
-                        <h2 className="post-title">{tweet.postTitle}</h2>
-                        <p>{}</p>
-                        <div className="votes-container">
-                        <img onClick={() => {handleUpVote()}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
-                        <p>{tweet.upvotes}</p>
-                        <img onClick={() => {handleDownVote()}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
-                        <p>{tweet.downvotes}</p>
-                        </div>
-                    </div>
-                </div>
+                <form className='follow-search-bar-form'>
+                        <img className='search-icon' src="/Images/noun-search-6312568.svg" alt="search-icon"></img>
+                        <input className='follow-search-bar-input' onChange={(e) => {setSearchTerm(e.target.value)}} type="text" placeholder='Search'></input>
+                </form>
+                {info && info.filter((val) => {
+                    if (searchTerm == "") {
+                        return val;
+                    } else if (val._id.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        return val;
+                    }
+                }).map((tweet) => {
+                    return    ( 
+                        <HomeTweet tweet={tweet} key={tweet._id} />
+                )
                 })}
             </>
             )
@@ -77,64 +82,36 @@ function TimelineTweet() {
         case 2:
             return (
                 <>
-                <div className='profile-page-container'>
+                    <div className='profile-page-container'>
                     <div className='profile-button-container'>
-                        <button className='profile-edit-button'>Edit Profile</button>
+                        {/* <button onClick={handleDarkMode} className='profile-edit-button'>Dark Mode</button> */}
                     </div>
                     <div className="profile-page-header">
                     <h1>{username}</h1>
                     <p>@{username}</p>
                     <div className='profile-follow'>
-                        <small><b>5</b> Following</small>
-                        <small><b>10</b> Followers</small>
+                        {/* <small><b>5</b> Following</small>
+                        <small><b>10</b> Followers</small> */}
                     </div>
                 </div>
                 </div>
-                    {info && info.map((tweet) => {
-                        // if (tweet.username == username) {
-                        return     <div className="table-row">
-                        {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
-                        <div className="post-container">
-                            <h3 style={{margin: "0"}}>Profile Name</h3>
-                            <small style={{margin: "0"}}>@{tweet.userID}</small>
-                            <h2 className="post-title">{tweet.postTitle}</h2>
-                            <p>{tweet.postMain}</p>
-                            <div className="votes-container">
-                            <img onClick={() => {handleUpVote()}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
-                            <p>{tweet.upvotes}</p>
-                            <img onClick={() => {handleDownVote()}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
-                            <p>{tweet.downvotes}</p>
-                            </div>
-                        </div>
-                    </div>  
-                        // }
-                    })}
+                {info && info.map((tweet) => {
+                if (tweet.userID == username) {
+                    return    ( 
+                        <ProfileTweet tweet={tweet} key={tweet._id} />
+                )
+                }
+                })}
                 </>
                 )
             break;
             case 3:
                 return (
                     <>
-                    <div className="profile-page-header">
-                    <h1>{username}</h1>
-                    <p>@{username}</p>
-                    </div>
                         {info && info.map((tweet) => {
-                            return     <div className="table-row">
-                            {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
-                            <div className="post-container">
-                                <h3 style={{margin: "0"}}>Profile Name</h3>
-                                <small style={{margin: "0"}}>@{tweet.userID}</small>
-                                <h2 className="post-title">{tweet.postTitle}</h2>
-                                <p>{tweet.postMain}</p>
-                                <div className="votes-container">
-                                <img onClick={() => {handleUpVote()}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
-                                <p>{tweet.upvotes}</p>
-                                <img onClick={() => {handleDownVote()}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
-                                <p>{tweet.downvotes}</p>
-                                </div>
-                            </div>
-                        </div>
+                            return  (   
+                                <FollowTweet tweet={tweet} key={tweet._id} />
+                            )
                         })}
                     </>
                     )

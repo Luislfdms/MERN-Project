@@ -1,66 +1,47 @@
-import {React, useState, Component} from 'react'
-import RegisterName from "./RegisterName";
-import RegisterUserName from "./RegisterUserName";
-import Confirmation from './Confirmation';
-import Success from './Success';
+import {React, useState} from 'react'
+import Login from "./LoginPage";
 import "./Register.css";
-import {Routes, Route} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default class RegisterPage extends Component {
-  
-  state = {
-    step: 1,
-    email: '',
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
+const RegisterName = ( {nextStep, handleChange, values} ) => {
+
+  const Continue = e => {
+    e.preventDefault();
+    nextStep();
   }
 
-  prevStep = () => {
-    const { step } = this.state;
-    this.setState({ step: step - 1 });
-  }
-
-  nextStep = () => {
-    const { step } = this.state;
-    this.setState({ step: step + 1 });
-  }
-
-  handleChange = input => e => {
-    this.setState({ [input]: e.target.value });
-  }
-
-  render() {
-    const { step } = this.state;
-    const { email, username, password, firstName, lastName } = this.state;
-    const values = { email, username, password, firstName, lastName };
-  
-    switch (step) {
-      case 1:
-        return (
-          <RegisterName
-            nextStep = { this.nextStep }
-            handleChange = { this.handleChange }
-            values = { values }
-          />
-        )
-      case 2:
-        return (
-          <RegisterUserName 
-            prevStep = { this.prevStep }
-            nextStep = { this.nextStep }
-            handleChange = { this.handleChange }
-            values = { values }
-          />
-        )
-      case 3:
-        return (
-          <Success 
-            values = { values }
-          />
-        )
-      default:
-    }
-  }
+  return (
+    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
+    <div className='container-page'>
+      <body className='login-container'>
+        <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img>
+        <h1><b style={{color: "red"}}>Register</b> your Account</h1>
+        <form>
+          <label className='input-label-border'>
+            <p className='register-text'>First Name</p>
+            <input 
+              type="text" 
+              className='input-box' 
+              placeholder='First Name'
+              value={values.firstName}
+              onChange={handleChange('firstName')} 
+            />
+            <p className='register-text'>Last Name</p>
+            <input 
+              type="text" 
+              className='input-box' 
+              placeholder='Last Name'
+              value={values.lastName}
+              onChange={handleChange('lastName')} 
+            />
+          <button onClick={ Continue } className='register-button'>Next</button>
+          <h4>Already have an account? <Link to="/login" className='sign-up-link'>Sign in</Link></h4>
+          </label>
+        </form>
+      </body>
+    </div>
+    </div>
+  )
 }
+
+export default RegisterName

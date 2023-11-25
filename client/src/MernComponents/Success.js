@@ -13,7 +13,7 @@ const Success = ({ values }) => {
   };
 
   return (
-    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
+    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524.jpg")'}}>
     <div className='container-page'>
       <body className='login-container'>
         <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img>

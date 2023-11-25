@@ -36,7 +36,7 @@ function LoginPage() {
 
   return (
     <body className='container-page'>
-    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524.jpg")'}}>
+    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
 
     </div>
     <div className='login-container'>

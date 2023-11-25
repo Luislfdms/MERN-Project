@@ -11,11 +11,11 @@ const RegisterUserName = ( {prevStep, nextStep, handleChange, values} ) => {
     e.preventDefault();
     try {
       const response = await axios.post('/userAPI/register', {
-        username: values.username,
-        email: values.email,
-        password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
+        email: values.email,
+        username: values.username,
+        password: values.password,
         followers: [],
         following: []
       })

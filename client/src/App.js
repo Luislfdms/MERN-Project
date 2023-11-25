@@ -1,7 +1,6 @@
 import './App.css';
 import Login from "./MernComponents/LoginPage";
 import Register from "./MernComponents/RegisterPage";
-import ProfilePage from "./MernComponents/ProfilePage";
 import {Routes, Route} from "react-router-dom";
 import VerifyAccount from './MernComponents/VerifyAccount';
 import HomePage from './MernComponents/HomePage';
@@ -16,7 +15,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/home' element={<HomePage />} />
-      <Route path='/verify/:username' element={<VerifyAccount />} />
+      {/* <Route path='/verify/:username' element={<VerifyAccount />} /> */}
       {/* <Route path='/home' element={<Home />} /> */}
       {/* <Route path='/followers' element{<Followers />} /> */}
     </Routes>

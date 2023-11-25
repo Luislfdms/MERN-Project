@@ -6,10 +6,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import TimelineTweet from './TimelineTweet';
-import RegisterPage from './RegisterPage';
-import { Link } from "react-router-dom";
-import {Routes, Route} from "react-router-dom";
-import ProfilePage from './ProfilePage';
 import { logout } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
 
@@ -20,25 +16,25 @@ import { useDispatch } from 'react-redux';
 function HomePage() {
   const [info, setInfo] = useState(null);
   const [username, setUserName] = useState("lulu");
-  const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
-  const [image, setImage] = useState(null);
-  const [upvote, setUpVote] = useState("0");
-  const [downvote, setDownVote] = useState("0");
+  const [upvotes, setUpvotes] = useState("");
+  const [downvotes, setDownvotes] = useState("");
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
   const start = useSelector((state) => state.user.start);
   const user = useSelector((state) => state.user.user);
-  // const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = useSelector((state) => state.currentUser);
 
 
   const handlePost = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post("/postAPI/add", {title, post, username, image, upvote, downvote});
+        console.log(user);
+        const response = await axios.post("/postAPI/add", {title, post, user, image, upvotes, downvotes});
         console.log("Post was successful", response);
     } catch (err) {
         console.log("Failed to post", err.response.data);
@@ -57,11 +53,14 @@ const handleHome = () => {
 const handleProfile = () => {
   dispatch(page(2));
 }
+const handleFollow = () => {
+  dispatch(page(3));
+}
   useEffect(() => {
     const fetchUserData = async () => {
       console.log(user);
       try {
-        const currentUser = await axios.get('/userAPI/user', {username});
+        const currentUser = await axios.get('/userAPI/user', {user});
         dispatch(currentUser(currentUser.data));
         console.log(currentUser.data);
       } catch (err) {
@@ -82,7 +81,7 @@ const handleProfile = () => {
         <LoginPage />
       ):(
 
-    <div className="home-container" style={{backgroundImage:'url("/Images/iStock-1310371524.jpg")'}}>
+    <div className="home-container" style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
       <div className="favorite-followers-tab">
         <div className='space-div'></div>
         <div className='nav-tab'>
@@ -95,11 +94,10 @@ const handleProfile = () => {
           <img className='profile-image' src="/Images/noun-profile-854888-FFFFFF.svg" alt="profile-logo"></img>
             Profile
             </button>
-          <button onClick={handleProfile} className='nav-buttons'>
+          {/* <button onClick={handleFollow} className='nav-buttons'>
           <img className='followers-image' src="/Images/noun-community-2082321-FFFFFF.svg" alt="followers-logo"></img>
             Followers
-            </button>
-        {/* <button className='post-button'>All Followers</button> */}
+            </button> */}
         <button onClick={handleLogout} className='logout-button'>Logout</button>
         </div>
       </div>
@@ -109,7 +107,7 @@ const handleProfile = () => {
         </div>
       </div>
       <div className="quick-post-feed">
-        <h3>What's on your mind?</h3>
+        <h3><b style={{color: "red"}}>What's</b> on your mind?</h3>
         <form className='form-container'>
           <label className='label-container'>
             <input onChange={(e) => setTitle(e.target.value)} className="post-input" type="text" placeholder='Title' />
