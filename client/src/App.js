@@ -15,7 +15,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/home' element={<HomePage />} />
-      {/* <Route path='/verify/:username' element={<VerifyAccount />} /> */}
+      <Route path='/verify/:username' element={<VerifyAccount />} /> 
       {/* <Route path='/home' element={<Home />} /> */}
       {/* <Route path='/followers' element{<Followers />} /> */}
     </Routes>
