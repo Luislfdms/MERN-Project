@@ -55,7 +55,6 @@ function ProfileTweet({tweet}) {
                             <h3 style={{margin: "0"}}>Profile Name</h3>
                             <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
                         </div>
-                            <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
                             <small style={{margin: "0"}}>@{tweet.userID}</small>
                             <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
                             <p >{tweet.postMain}</p>
