@@ -8,7 +8,7 @@ import LoginPage from './LoginPage';
 import TimelineTweet from './TimelineTweet';
 import { logout } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
-
+import { useSwipeable } from 'react-swipeable';
 
 
 
