@@ -68,7 +68,7 @@ function TimelineTweet() {
                 {info && info.filter((val) => {
                     if (searchTerm == "") {
                         return val;
-                    } else if (val.postTitle.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    } else if (val.postTitle.toLowerCase().includes(searchTerm.toLowerCase()) || val.userID.toLowerCase().includes(searchTerm.toLowerCase())) {
                         return val;
                     }
                 }).map((tweet) => {
