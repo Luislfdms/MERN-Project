@@ -15,8 +15,6 @@ function HomeTweet({tweet}) {
     // const {currentUser} = useSelector((state) => state.user);
     
     const handleUpVote = async (id) => {
-        // e.preventDefault();
-        // console.log(id);
         try {
             const response = await axios.patch("/postAPI/upvote", {id});
             console.log("upvote was successful", response);
@@ -26,7 +24,6 @@ function HomeTweet({tweet}) {
     }
     
     const handleDownVote = async (id) => {
-        // e.preventDefault();
         try {
             const response = await axios.patch("/postAPI/downvote", {id});
             console.log("downvote was successful", response);
@@ -40,13 +37,11 @@ function HomeTweet({tweet}) {
     return (
         <div className="timeline-tweet-container">
             <div className="table-row">
-            {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
             <div className="post-container">
                 <div className="name-delete-container">
-                    <h3 style={{margin: "0"}}>Profile Name</h3>
-                    {/* <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img> */}
+                    <h3 className="profile-name-h3" style={{margin: "0"}}>Profile Name</h3>
                 </div>
-                <small style={{margin: "0"}}>@{tweet.userID}</small>
+                <small className="user-name-small" style={{margin: "0"}}>@{tweet.userID}</small>
                 <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
                 <p className="post-main" style={{ maxHeight: "80px", overflowY: "auto", margin:"0" }}>{tweet.postMain}</p>
                 <div className="votes-container">

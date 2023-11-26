@@ -31,9 +31,7 @@ function HomePage() {
 
 
   const handlePost = async (e) => {
-    e.preventDefault();
     try {
-        // console.log(userID);
         const response = await axios.post("/postAPI/add", {postTitle, postMain, userID, image, upvotes, downvotes});
         console.log("Post was successful", response);
         setPostMain("");
@@ -76,7 +74,6 @@ const handleFollow = () => {
 
 
   return (
-    // <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
 
     <>
       {!start ? (

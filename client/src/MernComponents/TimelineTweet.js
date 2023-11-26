@@ -21,40 +21,37 @@ function TimelineTweet() {
     const username = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     
-    const handleUpVote = async (e, id) => {
-        // e.preventDefault();
-        console.log(id);
-        try {
-            console.log(id);
-            const response = await axios.patch("/postAPI/upvote", id);
-            console.log("upvote was successful", response);
-        } catch (err) {
-            console.log("Failed to upvote", err.response.data);
-        }
-    }
+    // const handleUpVote = async (e, id) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await axios.patch("/postAPI/upvote", id);
+    //         console.log("upvote was successful", response);
+    //     } catch (err) {
+    //         console.log("Failed to upvote", err.response.data);
+    //     }
+    // }
     
-    const handleDownVote = async (id) => {
-        // e.preventDefault();
-        try {
-            const response = await axios.post("/postAPI/downvote", id);
-            console.log("downvote was successful", response);
-        } catch (err) {
-            console.log("Failed to downvote", err.response.data);
-        }
-    }
+    // const handleDownVote = async (e, id) => {
+    //     e.preventDefault();
+    //     try {
+    //         const response = await axios.post("/postAPI/downvote", id);
+    //         console.log("downvote was successful", response);
+    //     } catch (err) {
+    //         console.log("Failed to downvote", err.response.data);
+    //     }
+    // }
 
     useEffect(() => {
       const fetchData = async () => {
         try {
           const feed = await axios.get('/postAPI/feed');
           setInfo(feed.data);
-        //   console.log(feed.data);
         } catch (err) {
           console.log("error", err);
         }
       };
       fetchData();
-    },[handleDownVote, handleUpVote]);
+    },[]);
     
     
     switch (page) {
@@ -84,7 +81,6 @@ function TimelineTweet() {
                 <>
                     <div className='profile-page-container'>
                     <div className='profile-button-container'>
-                        {/* <button onClick={handleDarkMode} className='profile-edit-button'>Dark Mode</button> */}
                     </div>
                     <div className="profile-page-header">
                     <h1>{username}</h1>

@@ -15,7 +15,6 @@ function ProfileTweet({tweet}) {
     // const {currentUser} = useSelector((state) => state.user);
     
     const handleUpVote = async (id) => {
-        // e.preventDefault();
         console.log(id);
         try {
             const response = await axios.patch("/postAPI/upvote", {id});
@@ -26,7 +25,6 @@ function ProfileTweet({tweet}) {
     }
     
     const handleDownVote = async (id) => {
-        // e.preventDefault();
         try {
             const response = await axios.patch("/postAPI/downvote", {id});
             console.log("downvote was successful", response);
@@ -37,8 +35,6 @@ function ProfileTweet({tweet}) {
 
     const handleDelete = async (id) => {
         try {
-            console.log(id);
-            console.log({id});
             const response = await axios.delete(`/postAPI/deletePost/${id}`);
             console.log("Delete was successful", response);
         } catch (err) {
@@ -50,10 +46,11 @@ function ProfileTweet({tweet}) {
     return (
         <div className="timeline-tweet-container">
         <div className="table-row">
-            {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
             <div className="post-container">
-                <h3 style={{margin: "0"}}>Profile Name</h3>
-                            <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
+            <div className="name-delete-container">
+                    <h3 className="profile-name-h3" style={{margin: "0"}}>Profile Name</h3>
+                    <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
+                </div>
                 <small style={{margin: "0"}}>@{tweet.userID}</small>
                 <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
                 <p className="post-main" style={{ maxHeight: "100px", overflowY: "auto" }}>{tweet.postMain}</p>
