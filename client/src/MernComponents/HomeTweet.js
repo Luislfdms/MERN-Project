@@ -36,7 +36,9 @@ function HomeTweet({tweet}) {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete("/postAPI/deletePost", {id});
+            console.log(id);
+            console.log({id});
+            const response = await axios.delete("/postAPI/deletePost", {id: id});
             console.log("Delete was successful", response);
         } catch (err) {
             console.log("Failed to Delete", err.response.data);

@@ -111,7 +111,7 @@ const handleFollow = () => {
         <form className='form-container'>
           <label className='label-container'>
             <input onChange={(e) => setTitle(e.target.value)} className="post-input" type="text" placeholder='Title' maxLength="30" />
-            <textarea onChange={(e) => setPost(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="100" ></textarea>
+            <textarea onChange={(e) => setPost(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="140" ></textarea>
           </label>
           <button onClick={handlePost} className='post-button'>Post</button>
         </form>

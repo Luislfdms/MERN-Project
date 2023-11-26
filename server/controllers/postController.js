@@ -60,8 +60,8 @@ const allFollowerPosts = async (req, res) => {
 
 const deletePosts = async (req, res) => {
   const { id } = req.body
-
-  if(!mongoose.Types.ObjectId.isValid(id)) {
+  console.log(req.body);
+  if(!mongoose.Types.ObjectId.isValid({id})) {
     return res.status(404).json({error: 'INVALID ID (POST)'})
   }
 
