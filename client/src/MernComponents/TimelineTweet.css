@@ -119,3 +119,13 @@
     left:2px;
     transform: translateY(-50%);
   }
+
+  .timeline-tweet-container {
+    width: 100%; /* Set a fixed width or use a percentage */
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 16px;
+    box-sizing: border-box; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
