@@ -39,6 +39,11 @@ function HomePage() {
     }
 };
 
+const handleInputClick = (e) => {
+  // Stop the click event from reaching the sidebar
+  e.stopPropagation();
+};
+
 const handleLogout = (e) => {
   e.preventDefault();
   dispatch(logout());
@@ -136,8 +141,8 @@ const toggleSidebar = () => {
                 <h3><b style={{color: "red"}}>What's</b> on your mind?</h3>
                 <form className='form-container'>
                   <label className='label-container'>
-                    <input onChange={(e) => setPostTitle(e.target.value)} className="post-input" type="text" placeholder='Title' maxLength="30" value={postTitle} />
-                    <textarea onChange={(e) => setPostMain(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="140" value={postMain} ></textarea>
+                    <input onChange={(e) => setPostTitle(e.target.value)} onClick={handleInputClick} className="post-input" type="text" placeholder='Title' maxLength="30" value={postTitle} />
+                    <textarea onChange={(e) => setPostMain(e.target.value)} onClick={handleInputClick} className="post-input post-body" type="text" placeholder='Post' maxLength="140" value={postMain} ></textarea>
                   </label>
                   <button onClick={handlePost} className='post-button'>Post</button>
                 </form>
