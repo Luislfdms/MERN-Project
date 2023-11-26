@@ -33,6 +33,17 @@ function ProfileTweet({tweet}) {
             console.log("Failed to downvote", err.response.data);
         }
     }
+
+    const handleDelete = async (id) => {
+        try {
+            console.log(id);
+            console.log({id});
+            const response = await axios.delete(`/postAPI/deletePost/${id}`);
+            console.log("Delete was successful", response);
+        } catch (err) {
+            console.log("Failed to Delete", err.response.data);
+        }
+    }
     
     
     return (
@@ -40,7 +51,10 @@ function ProfileTweet({tweet}) {
                         <div className="table-row">
                         {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
                         <div className="post-container">
+                        <div className="name-delete-container">
                             <h3 style={{margin: "0"}}>Profile Name</h3>
+                            <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
+                        </div>
                             <small style={{margin: "0"}}>@{tweet.userID}</small>
                             <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
                             <p >{tweet.postMain}</p>
