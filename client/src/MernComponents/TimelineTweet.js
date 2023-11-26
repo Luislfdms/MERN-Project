@@ -21,25 +21,25 @@ function TimelineTweet() {
     const username = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     
-    // const handleUpVote = async (e, id) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await axios.patch("/postAPI/upvote", id);
-    //         console.log("upvote was successful", response);
-    //     } catch (err) {
-    //         console.log("Failed to upvote", err.response.data);
-    //     }
-    // }
+    const handleUpVote = async (e, id) => {
+        e.preventDefault();
+        try {
+            const response = await axios.patch("/postAPI/upvote", id);
+            console.log("upvote was successful", response);
+        } catch (err) {
+            console.log("Failed to upvote", err.response.data);
+        }
+    }
     
-    // const handleDownVote = async (e, id) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await axios.post("/postAPI/downvote", id);
-    //         console.log("downvote was successful", response);
-    //     } catch (err) {
-    //         console.log("Failed to downvote", err.response.data);
-    //     }
-    // }
+    const handleDownVote = async (e, id) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("/postAPI/downvote", id);
+            console.log("downvote was successful", response);
+        } catch (err) {
+            console.log("Failed to downvote", err.response.data);
+        }
+    }
 
     useEffect(() => {
       const fetchData = async () => {
@@ -51,7 +51,7 @@ function TimelineTweet() {
         }
       };
       fetchData();
-    },[]);
+    },[handleDownVote, handleUpVote]);
     
     
     switch (page) {
