@@ -16,8 +16,8 @@ import { useDispatch } from 'react-redux';
 function HomePage() {
   const [info, setInfo] = useState(null);
   // const [username, setUserName] = useState("");
-  const [postMain, setTitle] = useState("");
-  const [postTitle, setPost] = useState("");
+  const [postMain, setPostMain] = useState("");
+  const [postTitle, setPostTitle] = useState("");
   const [upvotes, setUpvotes] = useState("");
   const [downvotes, setDownvotes] = useState("");
   const [image, setImage] = useState("");
@@ -33,9 +33,11 @@ function HomePage() {
   const handlePost = async (e) => {
     e.preventDefault();
     try {
-        console.log(userID);
-        const response = await axios.post("/postAPI/add", {postTitle, postMain, userID, image, upvotes, downvotes});
+        // console.log(userID);
+        const response = await axios.post("/postAPI/add", {postMain, postTitle, userID, image, upvotes, downvotes});
         console.log("Post was successful", response);
+        setPostMain("");
+        setPostTitle("");
     } catch (err) {
         console.log("Failed to post", err.response.data);
     }
@@ -94,10 +96,10 @@ const handleFollow = () => {
           <img className='profile-image' src="/Images/noun-profile-854888-FFFFFF.svg" alt="profile-logo"></img>
             Profile
             </button>
-          {/* <button onClick={handleFollow} className='nav-buttons'>
+          <button onClick={handleFollow} className='nav-buttons'>
           <img className='followers-image' src="/Images/noun-community-2082321-FFFFFF.svg" alt="followers-logo"></img>
             Followers
-            </button> */}
+            </button>
         <button onClick={handleLogout} className='logout-button'>Logout</button>
         </div>
       </div>
@@ -110,8 +112,8 @@ const handleFollow = () => {
         <h3><b style={{color: "red"}}>What's</b> on your mind?</h3>
         <form className='form-container'>
           <label className='label-container'>
-            <input onChange={(e) => setTitle(e.target.value)} className="post-input" type="text" placeholder='Title' maxLength="30" />
-            <textarea onChange={(e) => setPost(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="140" ></textarea>
+            <input onChange={(e) => setPostTitle(e.target.value)} className="post-input" type="text" placeholder='Title' maxLength="30" value={postTitle} />
+            <textarea onChange={(e) => setPostMain(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="140" value={postMain} ></textarea>
           </label>
           <button onClick={handlePost} className='post-button'>Post</button>
         </form>
