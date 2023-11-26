@@ -47,8 +47,8 @@ function HomeTweet({tweet}) {
                     {/* <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img> */}
                 </div>
                 <small style={{margin: "0"}}>@{tweet.userID}</small>
-                <h2 className="post-title"><b style={{color: "red"}}>{tweet.postMain}</b></h2>
-                <p className="post-main" style={{ maxHeight: "80px", overflowY: "auto", margin:"0" }}>{tweet.postTitle}</p>
+                <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
+                <p className="post-main" style={{ maxHeight: "80px", overflowY: "auto", margin:"0" }}>{tweet.postMain}</p>
                 <div className="votes-container">
                 <img onClick={() => {handleUpVote(tweet._id)}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
                 <p>{tweet.upvotes}</p>

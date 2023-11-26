@@ -34,7 +34,7 @@ function HomePage() {
     e.preventDefault();
     try {
         // console.log(userID);
-        const response = await axios.post("/postAPI/add", {postMain, postTitle, userID, image, upvotes, downvotes});
+        const response = await axios.post("/postAPI/add", {postTitle, postMain, userID, image, upvotes, downvotes});
         console.log("Post was successful", response);
         setPostMain("");
         setPostTitle("");
