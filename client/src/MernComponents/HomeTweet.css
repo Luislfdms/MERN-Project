@@ -88,3 +88,20 @@
     color: white;
     font-size: large;
 }
+
+.name-delete-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trashcan-image {
+    height: 45px;
+    width: 45px;
+    margin: auto;
+    cursor: pointer;
+    margin-right:10px;
+    transition: all 0.3s ease-in-out;
+}
+.trashcan-image:hover {
+    transform: scale(0.8);
+  }

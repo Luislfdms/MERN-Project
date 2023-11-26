@@ -15,7 +15,7 @@ function HomeTweet({tweet}) {
     
     const handleUpVote = async (id) => {
         // e.preventDefault();
-        console.log(id);
+        // console.log(id);
         try {
             const response = await axios.patch("/postAPI/upvote", {id});
             console.log("upvote was successful", response);
@@ -33,16 +33,28 @@ function HomeTweet({tweet}) {
             console.log("Failed to downvote", err.response.data);
         }
     }    
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete("/postAPI/deletePost", {id});
+            console.log("Delete was successful", response);
+        } catch (err) {
+            console.log("Failed to Delete", err.response.data);
+        }
+    }
     
     return (
         <>
                     <div className="table-row">
                     {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
                     <div className="post-container">
-                        <h3 style={{margin: "0"}}>Profile Name</h3>
+                        <div className="name-delete-container">
+                            <h3 style={{margin: "0"}}>Profile Name</h3>
+                            <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
+                        </div>
                         <small style={{margin: "0"}}>@{tweet.userID}</small>
-                        <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
-                        <p>{tweet.postMain}</p>
+                        <h2 className="post-title"><b style={{color: "red"}}>{tweet.postMain}</b></h2>
+                        <p>{tweet.postTitle}</p>
                         <div className="votes-container">
                         <img onClick={() => {handleUpVote(tweet._id)}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
                         <p>{tweet.upvotes}</p>
