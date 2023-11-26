@@ -96,10 +96,10 @@ const handleFollow = () => {
           <img className='profile-image' src="/Images/noun-profile-854888-FFFFFF.svg" alt="profile-logo"></img>
             Profile
             </button>
-          <button onClick={handleFollow} className='nav-buttons'>
+          {/* <button onClick={handleFollow} className='nav-buttons'>
           <img className='followers-image' src="/Images/noun-community-2082321-FFFFFF.svg" alt="followers-logo"></img>
             Followers
-            </button>
+            </button> */}
         <button onClick={handleLogout} className='logout-button'>Logout</button>
         </div>
       </div>
