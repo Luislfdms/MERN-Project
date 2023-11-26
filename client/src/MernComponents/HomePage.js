@@ -8,10 +8,7 @@ import LoginPage from './LoginPage';
 import TimelineTweet from './TimelineTweet';
 import { logout } from '../redux/userSlice';
 import { useDispatch } from 'react-redux';
-
-
-
-
+import { useSwipeable } from 'react-swipeable';
 
 function HomePage() {
   const [info, setInfo] = useState(null);
@@ -21,6 +18,7 @@ function HomePage() {
   const [upvotes, setUpvotes] = useState("");
   const [downvotes, setDownvotes] = useState("");
   const [image, setImage] = useState("");
+  const [sidebarVisible, setSidebarVisible] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,8 +54,23 @@ const handleProfile = () => {
   dispatch(page(2));
 }
 const handleFollow = () => {
-  dispatch(page(3));
+  dispatch(page(3)); 
 }
+
+const handlers = useSwipeable({
+  onSwipedRight: () => setSidebarVisible(true),
+  preventDefaultTouchmoveEvent: true,
+  onSwipedLeft: () => {
+    setSidebarVisible(false);
+  },
+  trackTouch: true,
+  trackMouse: false,
+});
+
+const toggleSidebar = () => {
+  setSidebarVisible(!sidebarVisible);
+};
+
   useEffect(() => {
     const fetchUserData = async () => {
       console.log(user);
@@ -72,9 +85,6 @@ const handleFollow = () => {
     fetchUserData();
   },[]);
 
-
-
-
   return (
     // <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
 
@@ -83,7 +93,11 @@ const handleFollow = () => {
         <LoginPage />
       ):(
 
-    <div className="home-container" style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
+    <div className="home-container" style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}} {...handlers}>
+      <div
+        className="draggable-handle"
+        onClick={toggleSidebar}
+      ></div>
       <div className="favorite-followers-tab">
         <div className='space-div'></div>
         <div className='nav-tab'>
@@ -102,7 +116,34 @@ const handleFollow = () => {
             </button> */}
         <button onClick={handleLogout} className='logout-button'>Logout</button>
         </div>
-      </div>
+          <div className={`sidebar ${sidebarVisible ? 'visible' : ''}`}
+            onClick={toggleSidebar}
+          >
+            <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img>
+              <div className="blocker" onClick={toggleSidebar}></div>
+              <div className="content">
+                <button onClick={handleHome} className='nav-buttons'>
+                  <img className='home-image' src="/Images/noun-home-6302446-FFFFFF.svg" alt="home-logo"></img>
+                  Home
+                  </button>
+                <button onClick={handleProfile} className='nav-buttons'>
+                <img className='profile-image' src="/Images/noun-profile-854888-FFFFFF.svg" alt="profile-logo"></img>
+                  Profile
+                  </button>
+                <button onClick={handleLogout} className='logout-button'>Logout</button>
+              </div>
+              <div className="quick-post-feed">
+                <h3><b style={{color: "red"}}>What's</b> on your mind?</h3>
+                <form className='form-container'>
+                  <label className='label-container'>
+                    <input onChange={(e) => setPostTitle(e.target.value)} className="post-input" type="text" placeholder='Title' maxLength="30" value={postTitle} />
+                    <textarea onChange={(e) => setPostMain(e.target.value)} className="post-input post-body" type="text" placeholder='Post' maxLength="140" value={postMain} ></textarea>
+                  </label>
+                  <button onClick={handlePost} className='post-button'>Post</button>
+                </form>
+              </div>
+          </div>
+        </div>
       <div className="main-feed">
         <div className="table-feed">
           <TimelineTweet />
