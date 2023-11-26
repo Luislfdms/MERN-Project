@@ -17,7 +17,7 @@ router.post('/add', createPost);
 
 router.get('/feed', getAllPosts);
 
-router.delete('/deletePost', deletePosts);
+router.delete('/deletePost/:id', deletePosts);
 
 router.get('/getUserPosts', getUserPosts);
 
