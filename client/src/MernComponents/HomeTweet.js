@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import "./HomeTweet.css";
+import "./TimelineTweet.css";
 
 function HomeTweet({tweet}) {
     const [info, setInfo] = useState(null);
@@ -37,25 +38,26 @@ function HomeTweet({tweet}) {
     
     
     return (
-        <>
-                    <div className="table-row">
-                    {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
-                    <div className="post-container">
-                        <div className="name-delete-container">
-                            <h3 style={{margin: "0"}}>Profile Name</h3>
-                        </div>
-                        <small style={{margin: "0"}}>@{tweet.userID}</small>
-                        <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
-                        <p>{tweet.postMain}</p>
-                        <div className="votes-container">
-                        <img onClick={() => {handleUpVote(tweet._id)}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
-                        <p>{tweet.upvotes}</p>
-                        <img onClick={() => {handleDownVote(tweet._id)}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
-                        <p>{tweet.downvotes}</p>
-                        </div>
-                    </div>
+        <div className="timeline-tweet-container">
+            <div className="table-row">
+            {/* <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img> */}
+            <div className="post-container">
+                <div className="name-delete-container">
+                    <h3 style={{margin: "0"}}>Profile Name</h3>
+                    {/* <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img> */}
                 </div>
-    </>
+                <small style={{margin: "0"}}>@{tweet.userID}</small>
+                <h2 className="post-title"><b style={{color: "red"}}>{tweet.postMain}</b></h2>
+                <p className="post-main" style={{ maxHeight: "80px", overflowY: "auto", margin:"0" }}>{tweet.postTitle}</p>
+                <div className="votes-container">
+                <img onClick={() => {handleUpVote(tweet._id)}} role="button" className='dog-paw-image-up' src="/Images/noun-paw-5940362middle.svg" alt="upvote-paw-logo"></img>
+                <p>{tweet.upvotes}</p>
+                <img onClick={() => {handleDownVote(tweet._id)}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
+                <p>{tweet.downvotes}</p>
+                </div>
+            </div>
+        </div>
+    </div>
   )
 }
 
