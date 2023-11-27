@@ -15,6 +15,9 @@ function TimelineTweet() {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+    const [descDisplay, setDescDisplay] = useState(false);
+    const [description, setDescription] = useState("");
+    const [userInfo, setUserInfo] = useState(null);
   
     const page = useSelector((state) => state.user.page);
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -50,9 +53,39 @@ function TimelineTweet() {
           console.log("error", err);
         }
       };
+
+      const getUser = async (e) => {
+          console.log(username);
+          console.log({username});
+        try {
+            const response = await axios.get("/userAPI/user", {username});
+            // console.log(response.data);
+            setUserInfo(response.data);
+            console.log("getting user was successful", response);
+        } catch (err) {
+            console.log("Failed to get user", err.response.data);
+        }
+    };
+
       fetchData();
+      getUser();
     },[handleDownVote, handleUpVote]);
     
+    const handleInputClick = (e) => {
+        // Stop the click event from reaching the sidebar
+        e.stopPropagation();
+    };
+
+    const handleDescription = async (e, id) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("/userAPI/description", {id});
+            console.log("getting description was successful", response);
+        } catch (err) {
+            console.log("Failed to get description", err.response.data);
+        }
+    }
+
     
     switch (page) {
         case 1:
@@ -85,6 +118,21 @@ function TimelineTweet() {
                     <div className="profile-page-header">
                     <h1>{username}</h1>
                     <p>@{username}</p>
+                    <>
+                    {descDisplay? (
+                        <div>
+                        <p>Description</p>
+                        <button className="description-button">Add Description</button>
+                        </div>
+                    ) : (
+                    <form className='descript-form-container'>
+                        <label className='descriptionlabel-container'>
+                            <textarea onChange={(e) => setDescription(e.target.value)} onClick={handleInputClick} className="desciption-post-input" type="text" placeholder='Post' maxLength="140" value={description} ></textarea>
+                        </label>
+                        <button onClick={handleDescription} className='post-button'>Submit</button>
+                    </form>
+                    )}
+                    </>
                     <div className='profile-follow'>
                         {/* <small><b>5</b> Following</small>
                         <small><b>10</b> Followers</small> */}

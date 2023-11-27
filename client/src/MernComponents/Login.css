@@ -29,7 +29,7 @@ h1 {
     /* background-image: url(http://placekitten.com/400/200); */
     background-position: 0px 0px;
     background-repeat: repeat;
-    animation: animatedBackground 10s linear infinite alternate;
+    animation: animatedBackground 5s linear infinite alternate;
 }
 
 .container-page {

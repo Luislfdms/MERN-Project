@@ -93,7 +93,7 @@ const toggleSidebar = () => {
   return (
 
 
-    <>
+    <div className="max-container">
       {!start ? (
         <LoginPage />
       ):(
@@ -167,7 +167,7 @@ const toggleSidebar = () => {
     </div>
 
       )}
-    </>
+    </div>
   )
 }
 

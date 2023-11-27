@@ -129,3 +129,16 @@
     box-sizing: border-box; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   }
+  .description-button {
+    margin-top: 2vw;
+    margin-right: 2vw;
+    background-color: rgba(241,73,68,255);
+    border: none;
+    border-radius: 30px;
+    height: 5vh;
+    width: 40%;
+    opacity: 1;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+  }
