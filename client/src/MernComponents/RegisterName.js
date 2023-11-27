@@ -13,7 +13,7 @@ const RegisterName = ( {nextStep, handleChange, values} ) => {
   return (
     <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
     <div className='container-page'>
-      <body className='login-container'>
+      <body className='register-container'>
         <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img>
         <h1><b style={{color: "red"}}>Register</b> your Account</h1>
         <form>

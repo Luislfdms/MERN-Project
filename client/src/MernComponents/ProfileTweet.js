@@ -48,7 +48,7 @@ function ProfileTweet({tweet}) {
         <div className="table-row">
             <div className="post-container">
             <div className="name-delete-container">
-                    <h3 className="profile-name-h3" style={{margin: "0"}}>Profile Name</h3>
+                    <h3 className="profile-name-h3" style={{margin: "0"}}>{tweet.userID}</h3>
                     <img onClick={() => {handleDelete(tweet._id)}} role="button" className='trashcan-image' src="/Images/trash-noun-888071.svg" alt="trashcan-logo"></img>
                 </div>
                 <small style={{margin: "0"}}>@{tweet.userID}</small>

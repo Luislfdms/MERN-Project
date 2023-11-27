@@ -35,27 +35,26 @@ function LoginPage() {
     };
 
   return (
-    <body className='container-page'>
-    <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
-
-    </div>
-    <div className='login-container'>
+      <div className='background-images' style={{backgroundImage:'url("/Images/iStock-1310371524 (1).jpg")'}}>
+        <div className='container-page'>
+    <body className='login-container'>
         <img className='clifford-image' src="/Images/imgonline-com-ua-ReplaceColor-x9TGUbjJLxxRliO4.jpg" alt="clifford-logo"></img>            
         <h1><b style={{color: "red"}}>Login</b> to your Account</h1>
-        <form onSubmit={handleLogin} className='input-container'>
-            <label className='input-label-border'>
+        <form onSubmit={handleLogin} className='login-input-container'>
+            <label className='login-input-label-border'>
                 <p className='login-text'>Username</p>
-                <input onChange={(e) => setUsername(e.target.value)} type="text" className='input-box' placeholder='Username' />
+                <input onChange={(e) => setUsername(e.target.value)} type="text" className='login-input-box' placeholder='Username' />
                 <p className='login-text'>Password</p>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" className='input-box' placeholder='Password'/>
+                <input onChange={(e) => setPassword(e.target.value)} type="password" className='login-input-box' placeholder='Password'/>
             <button className='login-button'>Sign in</button>
             {/* <button className='forgot-password-button'>Forgot password?</button> */}
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <h4>Don't have an account? <Link to='/register' className='sign-up-link'>Sign up</Link></h4> 
             </label>
         </form>
+    </body>
     </div>
-        </body>
+        </div>
   )
 }
 

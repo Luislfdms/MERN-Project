@@ -2,9 +2,7 @@ import { React, useState, useEffect} from 'react'
 import axios from "axios";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LoginPage from './LoginPage';
 import "./HomeTweet.css";
-import "./TimelineTweet.css";
 
 function HomeTweet({tweet}) {
     const [info, setInfo] = useState(null);
@@ -39,7 +37,7 @@ function HomeTweet({tweet}) {
             <div className="table-row">
             <div className="post-container">
                 <div className="name-delete-container">
-                    <h3 className="profile-name-h3" style={{margin: "0"}}>Profile Name</h3>
+                    <h3 className="profile-name-h3" style={{margin: "0"}}>{tweet.userID}</h3>
                 </div>
                 <small className="user-name-small" style={{margin: "0"}}>@{tweet.userID}</small>
                 <h2 className="post-title"><b style={{color: "red"}}>{tweet.postTitle}</b></h2>
