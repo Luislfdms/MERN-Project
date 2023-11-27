@@ -30,7 +30,23 @@ function HomeTweet({tweet}) {
         }
     }    
 
+    function formatTimeAgo(createdAt) {
+        const now = new Date();
+        const tweetDate = new Date(createdAt);
+        const timeDifference = now - tweetDate;
+        const minutesAgo = Math.floor(timeDifference / (1000 * 60));
+        const hoursAgo = Math.floor(timeDifference / (1000 * 60 * 60));
+      
+        if (minutesAgo < 60) {
+          return `${minutesAgo} m`;
+        } else if (hoursAgo < 24) {
+          return `${hoursAgo} h`;
+        } else {
+          return tweet.createdAt.substring(0, 10); // More than a day ago
+        }
+      }
     
+      const timeAgoString = formatTimeAgo(tweet.createdAt);
     
     return (
         <div className="timeline-tweet-container">
@@ -48,6 +64,7 @@ function HomeTweet({tweet}) {
                 <img onClick={() => {handleDownVote(tweet._id)}} role="button" className='dog-paw-image-down' src="/Images/upsidedown-noun-paw-5940362middle.svg" alt="downvote-paw-logo"></img>
                 <p>{tweet.downvotes}</p>
                 </div>
+                <p>{timeAgoString}</p>
             </div>
         </div>
     </div>
