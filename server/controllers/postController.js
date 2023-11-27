@@ -47,14 +47,28 @@ const getTitlePosts = async (req, res) => {
 const viewFollowerPosts = async (req, res) => {
   const {username} = req.body
   const posts = await Post.find({userID: username}).sort({createdAt: -1})
+  if(!posts) {
+    return res.status(400).json('Invalid user or posts')
+  }
   res.status(200).json(posts)
 }
 
 const allFollowerPosts = async (req, res) => {
   const {username} = req.body
   const user = await User.findOne({username: username})
+  if(!user) {
+    return res.status(400).json('Invalid user')
+  }
+
   const following = user.following
+  if(!posts) {
+    return res.status(400).json('Invalid/No following')
+  }
+
   const posts = await Post.find({userID: {$in: following}}).sort({createdAt: -1})
+  if(!posts) {
+    return res.status(400).json('Invalid/No posts')
+  }
   res.status(200).json(posts)
 }
 
