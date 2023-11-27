@@ -191,6 +191,15 @@ const viewFollowing = async (req, res) => {
   return res.status(200).json(user.following)
 }
 
+const createDescription = async (req, res) => {
+  const {username, description} = req.body
+  const desc = await User.findOneAndUpdate({username: username}, {description: description})
+  if(!desc) {
+    return res.status(200).json('Invalid user or description')
+  }
+  return res.status(200).json('New description added')
+}
+
 module.exports = {
   createUser,
   loginUser,
@@ -202,5 +211,6 @@ module.exports = {
   followUser,
   unfollowUser,
   viewFollowers,
-  viewFollowing
+  viewFollowing,
+  createDescription,
 };

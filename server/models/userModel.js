@@ -37,6 +37,10 @@ const userSchema = new Schema({
   verificationToken: {
     type: String,
     required: false
+  },
+  description: {
+    type: String,
+    required: false
   }
 }, { timestamps: true })
 

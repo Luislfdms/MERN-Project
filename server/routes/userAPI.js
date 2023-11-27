@@ -12,7 +12,8 @@ const {
   followUser,
   unfollowUser,
   viewFollowers,
-  viewFollowing
+  viewFollowing,
+  createDescription,
 } = require('../controllers/userController');
 
 router.use(cors());
@@ -39,5 +40,7 @@ router.patch('/unfollow', unfollowUser);
 router.get('/followers', viewFollowers);
 
 router.get('/following', viewFollowing);
+
+router.post('/description', createDescription);
 
 module.exports = (router);
