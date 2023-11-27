@@ -104,7 +104,7 @@ const deleteUser = async (req, res) => {
   const user = await User.findOneAndDelete({_id: id})
 
   if(!user) {
-    return res.status(404).json({error: 'POST COULD NOT BE DELETED'})
+    return res.status(404).json({error: 'USER COULD NOT BE DELETED'})
   }
 
   res.status(200).json('USER DELETED')
@@ -123,7 +123,7 @@ const updatePassword = async (req, res) => {
 }
 
 const seeUserStats = async (req, res) => {
-  const {username} = req.query.username
+  const {username} = req.params
 
   const user = await User.findOne({username: username})
   if(!user) {
