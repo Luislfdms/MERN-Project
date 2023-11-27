@@ -41,6 +41,6 @@ router.get('/followers', viewFollowers);
 
 router.get('/following', viewFollowing);
 
-router.post('/description', createDescription);
+router.patch('/description', createDescription);
 
 module.exports = (router);
