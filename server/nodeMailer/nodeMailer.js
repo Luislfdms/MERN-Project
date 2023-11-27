@@ -14,8 +14,8 @@ async function main(email, verificationToken) {
     port: '465',
     secure: true,
     auth: {
-      user: 'NODE_USERNAME',
-      pass: 'NODE_PASS'
+      user: process.env.NODE_USERNAME,
+      pass: process.env.NODE_PASS
     }
   });
 

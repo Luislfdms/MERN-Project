@@ -22,10 +22,8 @@ function TimelineTweet() {
     const dispatch = useDispatch();
     
     const handleUpVote = async (e, id) => {
-        // e.preventDefault();
-        console.log(id);
+        e.preventDefault();
         try {
-            console.log(id);
             const response = await axios.patch("/postAPI/upvote", id);
             console.log("upvote was successful", response);
         } catch (err) {
@@ -33,8 +31,8 @@ function TimelineTweet() {
         }
     }
     
-    const handleDownVote = async (id) => {
-        // e.preventDefault();
+    const handleDownVote = async (e, id) => {
+        e.preventDefault();
         try {
             const response = await axios.post("/postAPI/downvote", id);
             console.log("downvote was successful", response);
@@ -48,7 +46,6 @@ function TimelineTweet() {
         try {
           const feed = await axios.get('/postAPI/feed');
           setInfo(feed.data);
-        //   console.log(feed.data);
         } catch (err) {
           console.log("error", err);
         }
@@ -68,7 +65,7 @@ function TimelineTweet() {
                 {info && info.filter((val) => {
                     if (searchTerm == "") {
                         return val;
-                    } else if (val._id.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    } else if (val.postTitle.toLowerCase().includes(searchTerm.toLowerCase()) || val.userID.toLowerCase().includes(searchTerm.toLowerCase())) {
                         return val;
                     }
                 }).map((tweet) => {
@@ -84,7 +81,6 @@ function TimelineTweet() {
                 <>
                     <div className='profile-page-container'>
                     <div className='profile-button-container'>
-                        {/* <button onClick={handleDarkMode} className='profile-edit-button'>Dark Mode</button> */}
                     </div>
                     <div className="profile-page-header">
                     <h1>{username}</h1>

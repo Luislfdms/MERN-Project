@@ -1,21 +1,21 @@
 .table-row {
     display:flex;
     justify-content: center;
-    /* margin-top: 50px; */
     border: 1px solid grey;
-    margin: auto;
-    /* border-radius: 30px; */
+    margin: none;
     background-color: white;
-    height: 21vw;
+    min-height: 100%;
     width: 100%;
+}
+.timeline-tweet-container {
+    min-height: 70vh;
 }
 
 .post-container {
     display: flex;
     flex-direction: column;
-    /* position: relative; */
     margin: 2vw;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
 }
 
@@ -24,12 +24,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    width: 100%;
+    min-height: 20%;
 }
 
 .dog-paw-image-up {
-    height: 45px;
-    width: 45px;
+    height: 10vh;
+    width: 10vh;
     margin: none;
+    padding: 1vh;
     cursor: pointer;
     margin-right:10px;
     transition: all 0.3s ease-in-out;
@@ -39,9 +42,10 @@
   }
 
   .dog-paw-image-down {
-    height: 70px;
-    width: 70px;
+    height: 10vh;
+    width: 10vh;
     margin: none;
+    padding: 1vh;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -51,7 +55,7 @@
 
 .profile-page-container {
     width: 100%;
-    height: 25vw;
+    min-height: 28vw;
     border: 1px solid grey;
     display: flex;
     flex-direction: column;
@@ -88,3 +92,39 @@
     color: white;
     font-size: large;
 }
+
+.name-delete-container {
+    display: flex;
+    justify-content: space-between;
+    min-height: 10%;
+}
+
+.trashcan-image {
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    cursor: pointer;
+    margin-right:10px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+.trashcan-image:hover {
+    transform: scale(0.8);
+  }
+  .profile-name-h3 {
+    font-size: 3vh;
+  }
+
+  .user-name-small {
+    font-size: 2vh;
+  }
+
+  .post-title {
+    font-size: 3.5vh;
+    min-height: 10%;
+  }
+
+  .post-main {
+    font-size: 2.5vh;
+    min-height: 30%;
+  }
