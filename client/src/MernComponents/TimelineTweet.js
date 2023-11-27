@@ -15,9 +15,9 @@ function TimelineTweet() {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
-    const [descDisplay, setDescDisplay] = useState(false);
+    const [descDisplay, setDescDisplay] = useState(true);
     const [description, setDescription] = useState("");
-    const [userInfo, setUserInfo] = useState(null);
+    const [userData, setUserData] = useState("");
   
     const page = useSelector((state) => state.user.page);
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -54,21 +54,7 @@ function TimelineTweet() {
         }
       };
 
-      const getUser = async (e) => {
-          console.log(username);
-          console.log({username});
-        try {
-            const response = await axios.get("/userAPI/user", {username});
-            // console.log(response.data);
-            setUserInfo(response.data);
-            console.log("getting user was successful", response);
-        } catch (err) {
-            console.log("Failed to get user", err.response.data);
-        }
-    };
-
       fetchData();
-      getUser();
     },[handleDownVote, handleUpVote]);
     
     const handleInputClick = (e) => {
@@ -76,13 +62,33 @@ function TimelineTweet() {
         e.stopPropagation();
     };
 
-    const handleDescription = async (e, id) => {
-        e.preventDefault();
+    useEffect(() => {
+        const getUser = async() => {
+            try {
+                const res = await axios.get(`/userAPI/user/${username}`);
+                setUserData(res.data);
+                console.log("getting user was successful", res);
+            } catch (err) {
+                console.log("Failed to get user", err);
+            }
+        }
+        getUser();
+    },[userData])
+    
+    const handleDescription = () => {
+        if (descDisplay) {
+            setDescDisplay(false);
+        } else {
+            setDescDisplay(true);
+        }
+    }
+
+    const handleSendDescription = async () => {
         try {
-            const response = await axios.post("/userAPI/description", {id});
-            console.log("getting description was successful", response);
+            const res = await axios.patch("/userAPI/description", {username, description});
+            console.log("sending desc was successful", res);
         } catch (err) {
-            console.log("Failed to get description", err.response.data);
+            console.log("Failed to send desc", err);
         }
     }
 
@@ -120,16 +126,17 @@ function TimelineTweet() {
                     <p>@{username}</p>
                     <>
                     {descDisplay? (
-                        <div>
-                        <p>Description</p>
-                        <button className="description-button">Add Description</button>
+                        <div className="descript-desc-container">
+                        <p className="description-text">{userData.description}</p>
+                        <button onClick={handleDescription} className="description-button">Add Description</button>
                         </div>
                     ) : (
                     <form className='descript-form-container'>
-                        <label className='descriptionlabel-container'>
-                            <textarea onChange={(e) => setDescription(e.target.value)} onClick={handleInputClick} className="desciption-post-input" type="text" placeholder='Post' maxLength="140" value={description} ></textarea>
+                        <label className='description-label-container'>
+                            <textarea onChange={(e) => setDescription(e.target.value)} onClick={handleInputClick} className="description-post-input" type="text" placeholder='Description' maxLength="140" value={description} ></textarea>
                         </label>
-                        <button onClick={handleDescription} className='post-button'>Submit</button>
+                        <button onClick={handleSendDescription} className='description-button'>Submit</button>
+                        <button onClick={handleDescription} className='description-button'>Cancel</button>
                     </form>
                     )}
                     </>

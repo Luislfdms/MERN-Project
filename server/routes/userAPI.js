@@ -25,7 +25,7 @@ router.post('/login', loginUser);
 
 router.delete('/delete', deleteUser);
 
-router.get('/user', seeUserStats);
+router.get('/user/:username', seeUserStats);
 
 router.patch('/updatePass', updatePassword);
  
