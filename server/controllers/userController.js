@@ -45,18 +45,18 @@ const nodeMailer = async(req, res) => {
 }
 
 const createUser = async (req, res) => {
-  const {firstName, lastName, email, username, password, followers, following} = req.body
+  const {firstName, lastName, email, username, password, followers, following, description} = req.body
 
   //add user to db
   const testUser = await User.findOne({username: username})
   const testEmail = await User.findOne({email: email})
   const verified = false;
   const verificationToken = generateVerificationToken();
-  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified);
+  console.log(firstName, ',',  lastName, ',', email, ',', username, ',', password, ',', followers, ',', following,',', verified, ',', description);
   if(!testUser) {
     if(!testEmail){
       try {
-        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified, verificationToken})
+        const user = await User.create({firstName, lastName, email, username, password, followers, following, verified, verificationToken, description})
         await emailValidation(email, verificationToken)
         return res.status(200).json('user created')
       } catch (error) {
@@ -123,7 +123,7 @@ const updatePassword = async (req, res) => {
 }
 
 const seeUserStats = async (req, res) => {
-  const {username} = req.body
+  const {username} = req.query.username
 
   const user = await User.findOne({username: username})
   if(!user) {
